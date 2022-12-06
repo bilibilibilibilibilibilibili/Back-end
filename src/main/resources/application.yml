@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/back-end?serverTimezone=Asia/Shanghai&useUnicode=ture
+    username: root
+    password: Bove1234
+  mail:
+    protocol: smtp
+    host: smtp.163.com
+    username:  EMLAT2022@163.com #????
+    password:  LIXYCSNNWOEBCGAL #???
+    port: 25 #163??
+    default-encoding: UTF-8 #??
+    properties:
+      mail:
+        debug: true #????????
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #????????
