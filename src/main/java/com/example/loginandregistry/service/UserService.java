@@ -5,6 +5,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.example.loginandregistry.mapper.UserMapper;
 import com.example.loginandregistry.pojo.User;
+import com.example.loginandregistry.util.TokenUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +18,8 @@ import java.util.Map;
 @Service
 public class UserService {
 
-
-
+    @Resource
+    private TokenUtil tokenUtil;
     @Resource
     private UserMapper userMapper;
     @Resource
@@ -29,7 +30,7 @@ public class UserService {
      * @return
      */
     @Transactional
-    public Map<String, Object> createAccount(User user){
+    public Map<String, Object> createAccount(User user){   //因为返回的是json所以直接用map收集对象
         //雪花算法生成确认码
         String confirmCode = IdUtil.getSnowflake(1,1).nextIdStr();
         //盐(加密用）
@@ -87,8 +88,10 @@ public class UserService {
             resultMap.put("message","用户名或密码错误");
             return resultMap;
         }
+        String token= tokenUtil.generateToken(user);
         resultMap.put("code",200);
         resultMap.put("message","登陆成功");
+        resultMap.put("token",token);
         return resultMap;
     }
 
@@ -119,5 +122,7 @@ public class UserService {
         }
         return resultMap;
     }
-
+    public String selectPasswordById(int id) {
+        return userMapper.selectPasswordById(id);
+    }
 }

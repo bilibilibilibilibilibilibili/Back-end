@@ -42,5 +42,9 @@ public interface UserMapper {
      * @return
      */
     @Select("SELECT email, password, salt FROM user WHERE email = #{email} AND is_valid = 1")
-    List<User> selectUserByEmail(@Param("email") String email);
+    List<User> selectUserByEmail(@Param("email") String email); //在集合中根据邮箱寻找账号
+
+    @Select("SELECT password FROM user WHERE id = #{id} AND is_valid = 1 ")
+    String selectPasswordById(@Param("id")int id);
+
 }

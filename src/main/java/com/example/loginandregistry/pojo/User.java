@@ -1,11 +1,14 @@
 package com.example.loginandregistry.pojo;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Data;   //自动构造setter，getter，builder，@RequiredArgsConstructor，@ToString，@EqualsAndHashCode
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * 创建实体
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
