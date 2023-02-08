@@ -22,3 +22,26 @@ public class User {
     private Byte isValid;
 
 }
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+class User2{
+    private Integer id;
+    private String email;
+    private String password; //密码使用md5+盐加密
+    private String salt;
+    private String phone;
+    private String userName;
+    private String idNumber;
+    private String identity;
+    private String studentNumber;
+    private String status;
+    private String sex;
+    private String grade;
+    private String birthday;
+    private LocalDateTime registerTime;
+    private String banTagJson;
+    private String followJson;
+    private String fansJson;
+}
