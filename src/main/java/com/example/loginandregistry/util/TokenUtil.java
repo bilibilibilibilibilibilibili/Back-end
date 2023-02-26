@@ -1,13 +1,17 @@
 package com.example.loginandregistry.util;
 
+import com.example.loginandregistry.pojo.Identity;
 import com.example.loginandregistry.pojo.User;
 import org.springframework.stereotype.Service;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.JWT;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import static com.example.loginandregistry.pojo.Identity.*;
 
 @Service
 public class TokenUtil {
@@ -24,7 +28,18 @@ public class TokenUtil {
      */
     public String generateToken(User user) {
         String token = "";
+        String isAdmin = "";
+        Identity identity = user.getIdentity();
+        switch(identity){
+            case ADMIN,PRIOR_ADMIN,SUPER_ADMIN -> isAdmin = "admin";
+            default ->  isAdmin = "false";
+        }
+        Date start = new Date();
+        Date end = new Date(System.currentTimeMillis() + 24*60*60*1000 * 7);    // 7天免登陆
         token = JWT.create().withAudience(String.valueOf(user.getId()))
+                .withAudience(isAdmin)
+//                .withIssuedAt(start)
+//                .withExpiresAt(end)
                 .sign(Algorithm.HMAC256(user.getPassword()));
         return token;
     }

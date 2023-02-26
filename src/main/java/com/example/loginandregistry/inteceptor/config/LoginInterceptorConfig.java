@@ -1,4 +1,4 @@
-package com.example.loginandregistry.config;
+package com.example.loginandregistry.inteceptor.config;
 
 import com.example.loginandregistry.inteceptor.LoginInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * 拦截器配置类
  */
 @Configuration
-public class interceptorConfig implements WebMvcConfigurer {
+public class LoginInterceptorConfig implements WebMvcConfigurer {
 
     /**
      * 设置拦截哪些路径，不拦截哪些路径
