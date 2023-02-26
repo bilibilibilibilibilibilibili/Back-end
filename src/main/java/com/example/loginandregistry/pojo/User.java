@@ -3,6 +3,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;   //自动构造setter，getter，builder，@RequiredArgsConstructor，@ToString，@EqualsAndHashCode
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 /**
  * 创建实体
  */
@@ -82,4 +84,6 @@ public class User{
      * 用户名
      */
     private String userName;
+    private String confirmCode;
+    private LocalDateTime activationTime;
 }

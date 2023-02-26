@@ -5,6 +5,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.example.loginandregistry.mapper.UserMapper;
 import com.example.loginandregistry.pojo.User;
+import com.example.loginandregistry.pojo.UserStatus;
 import com.example.loginandregistry.util.TokenUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class UserService {
         user.setPassword(md5Pwd);
         user.setConfirmCode(confirmCode);
         user.setActivationTime(ldt);
-        user.setIsValid((byte)0);
+        user.setStatus(UserStatus.GUEST);
         //新增账号
         int result = userMapper.insertUser(user);
         Map<String, Object> resultMap = new HashMap<>();
