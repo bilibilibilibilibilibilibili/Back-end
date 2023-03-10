@@ -21,6 +21,4 @@ public interface PostMapper {
             "comment, topComment FROM post WHERE status='pass' ORDER BY releaseTime LIMIT #{offset},10")
     List<Post> selectPostByTime(int offset);
 
-
-
 }

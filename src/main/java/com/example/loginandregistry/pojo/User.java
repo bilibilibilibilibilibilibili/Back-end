@@ -1,4 +1,7 @@
 package com.example.loginandregistry.pojo;
+import com.example.loginandregistry.pojo.enumClass.Identity;
+import com.example.loginandregistry.pojo.enumClass.SexEnum;
+import com.example.loginandregistry.pojo.enumClass.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;   //自动构造setter，getter，builder，@RequiredArgsConstructor，@ToString，@EqualsAndHashCode
 import lombok.NoArgsConstructor;

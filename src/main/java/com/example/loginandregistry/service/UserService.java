@@ -5,7 +5,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.example.loginandregistry.mapper.UserMapper;
 import com.example.loginandregistry.pojo.User;
-import com.example.loginandregistry.pojo.UserStatus;
+import com.example.loginandregistry.pojo.enumClass.UserStatus;
 import com.example.loginandregistry.util.TokenUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

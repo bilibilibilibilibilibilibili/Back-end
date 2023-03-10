@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping(path="user",produces = "application/json; charset=UTF-8")
 public class UserController {
 
     @Resource

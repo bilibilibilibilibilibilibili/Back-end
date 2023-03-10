@@ -1,4 +1,4 @@
-package com.example.loginandregistry.pojo;
+package com.example.loginandregistry.pojo.enumClass;
 
 import java.io.IOException;
 

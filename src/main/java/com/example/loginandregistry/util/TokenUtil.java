@@ -1,6 +1,6 @@
 package com.example.loginandregistry.util;
 
-import com.example.loginandregistry.pojo.Identity;
+import com.example.loginandregistry.pojo.enumClass.Identity;
 import com.example.loginandregistry.pojo.User;
 import org.springframework.stereotype.Service;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -9,9 +9,6 @@ import com.auth0.jwt.JWT;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
-
-import static com.example.loginandregistry.pojo.Identity.*;
 
 @Service
 public class TokenUtil {

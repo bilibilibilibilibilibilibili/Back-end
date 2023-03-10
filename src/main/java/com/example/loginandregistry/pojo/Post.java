@@ -1,10 +1,16 @@
 package com.example.loginandregistry.pojo;
 
-import java.io.IOException;
+import com.example.loginandregistry.pojo.enumClass.PostStatus;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Post
  */
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Post {
     /**
      * 作者id
@@ -46,65 +52,29 @@ public class Post {
      * 媒体资源地址列表
      */
     private Resource[] resources;
+    /**
+     * 帖子发布，审核状态
+     * PASS -> 通过
+     * RETURN -> 退回
+     * WAIT -> 等待审核
+     */
     private PostStatus status;
+    /**
+     * Tag数组
+     */
     private Tag[] tag;
     /**
      * 标题
      */
     private String title;
     /**
-     * 置顶评论id
+     * 置顶评论楼层
      */
     private String topComment;
     /**
      * 浏览量
      */
     private long views;
-
-    public String getAuthor() { return author; }
-    public void setAuthor(String value) { this.author = value; }
-
-    public String getCollections() { return collections; }
-    public void setCollections(String value) { this.collections = value; }
-
-    public String getComment() { return comment; }
-    public void setComment(String value) { this.comment = value; }
-
-    public boolean getCommentYorN() { return commentYorN; }
-    public void setCommentYorN(boolean value) { this.commentYorN = value; }
-
-    public String getContent() { return content; }
-    public void setContent(String value) { this.content = value; }
-
-    public String getid() { return id; }
-    public void setid(String value) { this.id = value; }
-
-    public String getLastCommentTime() { return lastCommentTime; }
-    public void setLastCommentTime(String value) { this.lastCommentTime = value; }
-
-    public String getLikes() { return likes; }
-    public void setLikes(String value) { this.likes = value; }
-
-    public String getReleaseTime() { return releaseTime; }
-    public void setReleaseTime(String value) { this.releaseTime = value; }
-
-    public Resource[] getResources() { return resources; }
-    public void setResources(Resource[] value) { this.resources = value; }
-
-    public PostStatus getStatus() { return status; }
-    public void setStatus(PostStatus value) { this.status = value; }
-
-    public Tag[] getTag() { return tag; }
-    public void setTag(Tag[] value) { this.tag = value; }
-
-    public String getTitle() { return title; }
-    public void setTitle(String value) { this.title = value; }
-
-    public String getTopComment() { return topComment; }
-    public void setTopComment(String value) { this.topComment = value; }
-
-    public long getViews() { return views; }
-    public void setViews(long value) { this.views = value; }
 }
 
 
