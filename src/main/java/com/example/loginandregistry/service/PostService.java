@@ -2,14 +2,14 @@ package com.example.loginandregistry.service;
 
 
 import com.example.loginandregistry.mapper.PostMapper;
+import com.example.loginandregistry.pojo.Post;
 import com.example.loginandregistry.pojo.response.BasicResponse;
 import com.example.loginandregistry.util.TokenUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -24,4 +24,13 @@ public class PostService {
         BasicResponse basicResponse = new BasicResponse();
         return basicResponse;
     }
+
+    public List<Post> selectPostByLastComment(int offset)  {
+        return postMapper.selectPostByLastComment(offset);
+    }
+
+    public List<Post> selectPostByTime(int offset) {
+        return postMapper.selectPostByTime(offset);
+    }
+
 }
