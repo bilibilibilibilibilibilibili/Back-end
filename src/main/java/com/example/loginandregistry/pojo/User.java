@@ -45,6 +45,12 @@ public class User{
     private String id;
     /**
      * 账号身份与权限
+     * ADMIN -> 管理员
+     * ORGANIZATION -> 组织/团体/部门
+     * PRIOR_ADMIN -> 最高权限
+     * STUDENT -> 学生
+     * SUPER_ADMIN -> 超管
+     * TEACHER -> 教师
      */
     private Identity identity;
     /**
@@ -73,10 +79,17 @@ public class User{
     private String salt;
     /**
      * 性别（生理）
+     * male -> 男
+     * female -> 女
+     * unknown -> 未知
      */
     private SexEnum sex;
     /**
      * 账号状态
+     * ban -> 封禁中
+     * cancel -> 已注销
+     * guest -> 临时账号
+     * normal -> 正常
      */
     private UserStatus status;
     /**

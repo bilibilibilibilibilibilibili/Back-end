@@ -20,7 +20,7 @@ public class PostService {
     private PostMapper postMapper;
 
     @RequestMapping("addPost")
-    public BasicResponse addPost(Map<String,Object> map){
+    public BasicResponse addPost(Post post){
         BasicResponse basicResponse = new BasicResponse();
         return basicResponse;
     }

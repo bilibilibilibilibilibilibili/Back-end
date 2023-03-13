@@ -1,6 +1,9 @@
 package com.example.loginandregistry.pojo;
 
-class Resource{
+import lombok.Data;
+
+@Data
+public class Resource{
     /**
      * 文件名
      */
