@@ -2,17 +2,30 @@ package com.example.loginandregistry.pojo.enumClass;
 
 import java.io.IOException;
 
-public enum CommentStatus {
-    VISIBLE, INVISIBLE, WAIT;
+public enum CommentStatus implements ValueEnum{
+    VISIBLE("visible"),
+    INVISIBLE("invisible"),
+    WAIT("wait");
 
-    public String toValue(){
-        switch (this){
-            case VISIBLE: return  "visible";
-            case INVISIBLE: return "invisible";
-            case WAIT: return "wait";
-        }
-        return null;
+    private String value;
+
+    CommentStatus(String value) {
+        this.value = value;
     }
+
+    @Override
+    public String getValue() {
+        return value;
+    }
+
+    //    public String toValue(){
+//        switch (this){
+//            case VISIBLE: return  "visible";
+//            case INVISIBLE: return "invisible";
+//            case WAIT: return "wait";
+//        }
+//        return null;
+//    }
 
     public static CommentStatus forValue(String value)throws IOException {
         if(value.equals("visible")) return VISIBLE;

@@ -4,6 +4,7 @@ package com.example.loginandregistry.controller;
 import com.example.loginandregistry.pojo.Post;
 import com.example.loginandregistry.pojo.Tag;
 import com.example.loginandregistry.pojo.response.BasicResponse;
+import com.example.loginandregistry.pojo.response.PostGetRequest;
 import com.example.loginandregistry.service.PostService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -56,12 +57,15 @@ public class PostController {
         return postService.addPost(post);
     }
 
-    @PostMapping("ByComment")
-    public List<Post> selectPostByLastComment(int offset) {
-        return postService.selectPostByLastComment(offset);
+    @PostMapping("by-comment")
+    public BasicResponse selectPostByLastComment(@RequestBody PostGetRequest request) {
+        int offset = request.getOffset();
+        List<Post> postList =  postService.selectPostByLastComment(offset);
+        return BasicResponse.getSuccessResponse("按最近评论，第"+offset+"页",
+                postList);
     }
 
-    @PostMapping("ByTime")
+    @PostMapping("by-time")
     public List<Post> selectPostByTime(int offset) {
         return postService.selectPostByTime(offset);
     }

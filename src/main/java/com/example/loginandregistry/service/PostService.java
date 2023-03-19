@@ -14,12 +14,12 @@ import java.util.Map;
 
 @Service
 public class PostService {
-    @Resource
+    @jakarta.annotation.Resource
     private TokenUtil tokenUtil;
-    @Resource
+    @jakarta.annotation.Resource
     private PostMapper postMapper;
 
-    @RequestMapping("addPost")
+
     public BasicResponse addPost(Post post){
         BasicResponse basicResponse = new BasicResponse();
         return basicResponse;

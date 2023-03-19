@@ -16,11 +16,11 @@ public class Tag {
      * HIT -> 热门tag
      * HIDDEN -> 隐藏
      */
-    private String status;
+    private TagStatus status;
 
     public String getName() { return name; }
     public void setName(String value) { this.name = value; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String value) { this.status = value; }
+    public String getStatus() { return status.getValue(); }
+    public void setStatus(String value) { this.status = TagStatus.forValue(value); }
 }

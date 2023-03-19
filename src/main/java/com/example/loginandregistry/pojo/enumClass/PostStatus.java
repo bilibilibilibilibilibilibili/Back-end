@@ -2,19 +2,20 @@ package com.example.loginandregistry.pojo.enumClass;
 
 import java.io.IOException;
 
-public enum PostStatus {
-    PASS, RETURN, WAIT;
+public enum PostStatus implements ValueEnum{
+    PASS("pass"),
+    RETURN("return"),
+    WAIT("wait");
 
-    public String toValue() {
-        switch (this) {
-            case PASS:
-                return "pass";
-            case RETURN:
-                return "return";
-            case WAIT:
-                return "wait";
-        }
-        return null;
+    private String value;
+
+    PostStatus(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String getValue() {
+        return value;
     }
 
     public static PostStatus forValue(String value) throws IOException {

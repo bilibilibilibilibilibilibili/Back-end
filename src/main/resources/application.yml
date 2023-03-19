@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/back-end?serverTimezone=Asia/Shanghai&useUnicode=ture
-    username: root
-    password: Bove1234
+    url: jdbc:mysql://localhost:3306/emlat?serverTimezone=Asia/Shanghai&useUnicode=ture
+    username: emlat
+    password: 666emlat666
   mail:
     protocol: smtp
     host: smtp.163.com
@@ -18,3 +18,4 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true #????????
+  type-handlers-package: com.example.loginandregistry.mapper.typeHandler

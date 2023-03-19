@@ -1,9 +1,12 @@
 package com.example.loginandregistry.pojo;
 
+import com.example.loginandregistry.mapper.typeHandler.JsonTypeHandler;
 import com.example.loginandregistry.pojo.enumClass.PostStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  * Post
@@ -15,15 +18,15 @@ public class Post {
     /**
      * 作者id
      */
-    private String author;
+    private int author;
     /**
      * 收藏量
      */
-    private String collections;
+    private int collections;
     /**
      * 评论表id
      */
-    private String comment;
+    private List<Comment> comment;
     /**
      * 是否允许评论
      */
@@ -35,7 +38,7 @@ public class Post {
     /**
      * 帖子id
      */
-    private String id;
+    private int id;
     /**
      * 最近评论时间
      */
@@ -43,7 +46,7 @@ public class Post {
     /**
      * 点赞量
      */
-    private String likes;
+    private int likes;
     /**
      * 发布时间
      */
@@ -51,7 +54,7 @@ public class Post {
     /**
      * 媒体资源地址列表
      */
-    private Resource[] resources;
+    private List<Resource> resources;
     /**
      * 帖子发布，审核状态
      * PASS -> 通过
@@ -62,7 +65,7 @@ public class Post {
     /**
      * Tag数组
      */
-    private Tag[] tag;
+    private List<Tag> tag;
     /**
      * 标题
      */
@@ -74,7 +77,7 @@ public class Post {
     /**
      * 浏览量
      */
-    private long views;
+    private int views;
 }
 
 
