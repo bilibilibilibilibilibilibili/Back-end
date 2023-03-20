@@ -1,6 +1,5 @@
 package com.example.loginandregistry.pojo;
 
-import com.example.loginandregistry.mapper.typeHandler.JsonTypeHandler;
 import com.example.loginandregistry.pojo.enumClass.PostStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,9 +23,9 @@ public class Post {
      */
     private int collections;
     /**
-     * 评论表id
+     * 评论数
      */
-    private List<Comment> comment;
+    private int comment;
     /**
      * 是否允许评论
      */
@@ -54,7 +53,7 @@ public class Post {
     /**
      * 媒体资源地址列表
      */
-    private List<Resource> resources;
+    private List<MediaResource> mediaResources;
     /**
      * 帖子发布，审核状态
      * PASS -> 通过
@@ -63,7 +62,7 @@ public class Post {
      */
     private PostStatus status;
     /**
-     * Tag数组
+     * Tag名字数组
      */
     private List<Tag> tag;
     /**

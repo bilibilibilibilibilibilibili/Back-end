@@ -1,11 +1,8 @@
 package com.example.loginandregistry.mapper.typeHandler;
 
-import com.example.loginandregistry.pojo.Post;
-import com.example.loginandregistry.pojo.Resource;
-import com.example.loginandregistry.pojo.Tag;
+import com.example.loginandregistry.pojo.MediaResource;
+import com.example.loginandregistry.pojo.TagTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import org.apache.ibatis.type.*;
@@ -14,16 +11,16 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-@MappedTypes(value = {Resource.class, Tag.class})
+@MappedTypes(value = {MediaResource.class, TagTest.class})
 @MappedJdbcTypes(JdbcType.LONGVARCHAR)
-public class JsonTypeHandler<T> implements TypeHandler<List<T>> {
+public class ListTypeHandler<T> implements TypeHandler<List<T>> {
 
     private Class<T> targetClass;
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    public JsonTypeHandler(Class<T> targetClass) {
+    public ListTypeHandler(Class<T> targetClass) {
         if (targetClass == null){
             throw new IllegalArgumentException("Type argument cannot be null");
         }
@@ -32,9 +29,8 @@ public class JsonTypeHandler<T> implements TypeHandler<List<T>> {
 
     @Override
     public void setParameter(PreparedStatement preparedStatement, int i, List<T> ts, JdbcType jdbcType) throws SQLException {
-        ObjectMapper mapper = new ObjectMapper();
         try {
-            preparedStatement.setString(i, mapper.writeValueAsString(ts));
+            preparedStatement.setString(i, OBJECT_MAPPER.writeValueAsString(ts));
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -46,7 +42,7 @@ public class JsonTypeHandler<T> implements TypeHandler<List<T>> {
         if (jsonArray != null){
             try{
                 return json2List(jsonArray);
-            }catch (JsonProcessingException e){ throw new RuntimeException(e); }
+            }catch (Exception e){ throw new RuntimeException(e); }
         }
         return null;
     }
@@ -57,7 +53,7 @@ public class JsonTypeHandler<T> implements TypeHandler<List<T>> {
         if (jsonArray != null){
             try {
                 return json2List(jsonArray);
-            }catch (JsonProcessingException e){ throw new RuntimeException(e); }
+            }catch (Exception e){ throw new RuntimeException(e); }
         }
         return null;
     }
@@ -68,15 +64,14 @@ public class JsonTypeHandler<T> implements TypeHandler<List<T>> {
         if (jsonArray != null){
             try {
                 return json2List(jsonArray);
-            }catch (JsonProcessingException e){ throw new RuntimeException(e); }
+            }catch (Exception e){ throw new RuntimeException(e); }
         }
         return null;
     }
 
-    private List<T> json2List(String jsonArray) throws JsonProcessingException{
-        ObjectMapper mapper = new ObjectMapper();
-        CollectionType javaType = mapper.getTypeFactory()
+    private List<T> json2List(String jsonArray) throws Exception{
+        CollectionType javaType = OBJECT_MAPPER.getTypeFactory()
                 .constructCollectionType(List.class, targetClass);
-        return mapper.readValue(jsonArray, javaType);
+        return OBJECT_MAPPER.readValue(jsonArray, javaType);
     }
 }

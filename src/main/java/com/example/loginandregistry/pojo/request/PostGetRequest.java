@@ -1,4 +1,4 @@
-package com.example.loginandregistry.pojo.response;
+package com.example.loginandregistry.pojo.request;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
