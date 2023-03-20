@@ -1,42 +1,40 @@
 package com.example.loginandregistry.pojo.enumClass;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum TagStatus {
+    // Jackson2.6及以上版本支持
+    @JsonProperty("hit")
     HIT("hit"),
+    @JsonProperty("normal")
     NORMAL("normal"),
+    @JsonProperty("hidden")
     HIDDEN("hidden");
 
-    private String alias;
+    private final String value;
 
     TagStatus(String value) {
-        this.alias = value;
+        this.value = value;
     }
 
-    public String getAlias() {
-        return alias;
+    public String getValue() {
+        return value;
     }
 
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public String toValue() {
-        switch (this) {
-            case HIT: return "hit";
-            case NORMAL: return "normal";
-            case HIDDEN: return "hidden";
-        }
-        return null;
-    }
+//    public String toValue() {
+//        switch (this) {
+//            case HIT: return "hit";
+//            case NORMAL: return "normal";
+//            case HIDDEN: return "hidden";
+//        }
+//        return null;
+//    }
 
     @JsonCreator
     public static TagStatus forValue(String value) {
         for(TagStatus tagStatus: TagStatus.values()){
-            if(tagStatus.getAlias().equals(value)){
+            if(tagStatus.getValue().equals(value)){
                 return tagStatus;
             }
         }

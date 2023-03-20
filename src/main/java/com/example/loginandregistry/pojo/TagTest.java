@@ -5,7 +5,7 @@ import com.example.loginandregistry.pojo.enumClass.TagStatus;
 /**
  * tag
  */
-public class Tag {
+public class TagTest {
     /**
      * tag名称
      */
@@ -16,11 +16,11 @@ public class Tag {
      * HIT -> 热门tag
      * HIDDEN -> 隐藏
      */
-    private TagStatus status;
+    private String status;
 
     public String getName() { return name; }
     public void setName(String value) { this.name = value; }
 
-    public String getStatus() { return status.getValue(); }
-    public void setStatus(String value) { this.status = TagStatus.forValue(value); }
+    public String getStatus() { return status; }
+    public void setStatus(String value) { this.status = value; }
 }

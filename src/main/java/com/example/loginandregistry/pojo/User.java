@@ -7,6 +7,7 @@ import lombok.Data;   //自动构造setter，getter，builder，@RequiredArgsCon
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 创建实体
@@ -18,7 +19,7 @@ public class User{
     /**
      * 屏蔽Tag
      */
-    private Tag[] banTag;
+    private List<Tag> banTag;
     /**
      * 生日
      */
@@ -28,13 +29,13 @@ public class User{
      */
     private String email;
     /**
-     * 粉丝
+     * 粉丝id列表
      */
-    private String[] fans;
+    private List<String> fans;
     /**
      * 关注的人
      */
-    private String[] follow;
+    private List<String> follow;
     /**
      * 年级
      */
@@ -67,14 +68,16 @@ public class User{
     private String phone;
     /**
      * 发布过的文章id
+     * 请求中不带
      */
-    private String[] post;
+    private List<String> post;
     /**
      * 注册时间
      */
     private String registerTime;
     /**
      * 盐加密公钥
+     * 仅后端
      */
     private String salt;
     /**
@@ -100,6 +103,12 @@ public class User{
      * 用户名
      */
     private String userName;
+    /**
+     * 邮箱验证码
+     */
     private String confirmCode;
+    /**
+     * 账号激活时间
+     */
     private LocalDateTime activationTime;
 }

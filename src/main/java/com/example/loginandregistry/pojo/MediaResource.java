@@ -3,7 +3,7 @@ package com.example.loginandregistry.pojo;
 import lombok.Data;
 
 @Data
-public class Resource{
+public class MediaResource {
     /**
      * 文件名
      */

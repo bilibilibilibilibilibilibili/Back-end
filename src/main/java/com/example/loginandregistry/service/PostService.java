@@ -3,6 +3,7 @@ package com.example.loginandregistry.service;
 
 import com.example.loginandregistry.mapper.PostMapper;
 import com.example.loginandregistry.pojo.Post;
+import com.example.loginandregistry.pojo.PostTest;
 import com.example.loginandregistry.pojo.response.BasicResponse;
 import com.example.loginandregistry.util.TokenUtil;
 import jakarta.annotation.Resource;
@@ -14,23 +15,23 @@ import java.util.Map;
 
 @Service
 public class PostService {
-    @Resource
+    @jakarta.annotation.Resource
     private TokenUtil tokenUtil;
-    @Resource
+    @jakarta.annotation.Resource
     private PostMapper postMapper;
 
-    @RequestMapping("addPost")
+
     public BasicResponse addPost(Post post){
         BasicResponse basicResponse = new BasicResponse();
         return basicResponse;
     }
 
-    public List<Post> selectPostByLastComment(int offset)  {
+    public List<PostTest> selectPostByLastComment(int offset)  {
         return postMapper.selectPostByLastComment(offset);
     }
 
-    public List<Post> selectPostByTime(int offset) {
-        return postMapper.selectPostByTime(offset);
-    }
+//    public List<Post> selectPostByTime(int offset) {
+//        return postMapper.selectPostByTime(offset);
+//    }
 
 }
