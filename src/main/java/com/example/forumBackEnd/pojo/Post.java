@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
