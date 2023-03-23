@@ -109,7 +109,22 @@ public class PostController {
     }
 
     @PostMapping("by-time")
-    public List<Post> selectPostByTime(int offset) {
-        return postService.selectPostByTime(offset);
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public BasicResponse selectPostByTime(@RequestBody PostGetRequest request) {
+        int offset = request.getOffset();
+        List<Post> postList = postService.selectPostByTime(offset);
+        for(Post post:postList){
+            System.out.println(post);
+        }
+        return BasicResponse.getSuccessResponse("按最近时间，第"+offset+"页",postList);
+    }
+
+    @PostMapping("by-id")
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public BasicResponse selectPostById(@RequestBody PostGetRequest request) {
+        int offset = request.getOffset();
+        Post post = postService.selectPostById(offset);
+        System.out.println(post);
+        return BasicResponse.getSuccessResponse("按id,第"+offset+"页",post);
     }
 }
