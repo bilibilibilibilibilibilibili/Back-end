@@ -8,9 +8,11 @@ import com.example.forumBackEnd.pojo.response.BasicResponse;
 import com.example.forumBackEnd.pojo.request.PostGetRequest;
 import com.example.forumBackEnd.service.PostService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +24,10 @@ import java.util.List;
 @RestController
 @RequestMapping(path="post",produces = "application/json; charset=UTF-8")
 public class PostController {
-    @jakarta.annotation.Resource
+    @Resource
     private PostService postService;
+
+    private final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @PostMapping("test")
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -53,13 +57,16 @@ public class PostController {
     };
 
     @PostMapping("add")
-    public BasicResponse addPost(@RequestBody Post post){
-        int postId = postService.addPost(post);
-        if(postId>0){
-            ObjectMapper mapper = new ObjectMapper();
-            ObjectNode node = mapper.createObjectNode();
-            node.put("postId",postId);
-            return BasicResponse.getSuccessResponse("添加成功",node);
+    public BasicResponse addPost(@RequestBody ObjectNode request) throws JsonProcessingException {
+        String json = request.get("post").toString();
+        if (!json.equals("null") && !json.equals("")){
+            Post post = OBJECT_MAPPER.readValue(json,Post.class);
+            int postId = postService.addPost(post);
+            if(postId>0){
+                ObjectNode node = OBJECT_MAPPER.createObjectNode();
+                node.put("postId",postId);
+                return BasicResponse.getSuccessResponse("添加成功",node);
+            }
         }
         return  BasicResponse.getFailResponse("添加失败");
     }
@@ -91,10 +98,13 @@ public class PostController {
     public BasicResponse selectPostByLastComment(@RequestBody PostGetRequest request) {
         int offset = request.getOffset();
         List<Post> postList =  postService.selectPostByLastComment(offset);
-        for(Post post:postList){
-            System.out.println(post);
+//        for(Post post:postList){
+//            System.out.println(post);
+//        }
+        if(postList.size() == 0){
+            return BasicResponse.getSuccessResponse("获取失败，结果为空。按最近评论，第"+offset+1+"页。",null);
         }
-        return BasicResponse.getSuccessResponse("按最近评论，第"+offset+"页",
+        return BasicResponse.getSuccessResponse("按最近评论，第"+offset+1+"页",
                 postList);
     }
 

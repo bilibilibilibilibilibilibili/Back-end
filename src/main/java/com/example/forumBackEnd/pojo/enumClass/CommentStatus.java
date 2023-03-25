@@ -1,11 +1,17 @@
 package com.example.forumBackEnd.pojo.enumClass;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.IOException;
 import java.util.stream.Stream;
 
 public enum CommentStatus implements ValueEnum{
-    VISIBLE("visible"),
-    INVISIBLE("invisible"),
+    @JsonProperty("ok")
+    VISIBLE("ok"),
+    @JsonProperty("deleted")
+    INVISIBLE("deleted"),
+    @JsonProperty("wait")
     WAIT("wait");
 
     private String value;
@@ -28,6 +34,7 @@ public enum CommentStatus implements ValueEnum{
 //        return null;
 //    }
 
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
     public static CommentStatus forValue(String value)throws IOException {
         if(value == null){
             return null;

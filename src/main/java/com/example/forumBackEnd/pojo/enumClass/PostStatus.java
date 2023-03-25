@@ -1,13 +1,17 @@
 package com.example.forumBackEnd.pojo.enumClass;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.IOException;
 import java.util.stream.Stream;
 
 public enum PostStatus implements ValueEnum{
+    @JsonProperty("pass")
     PASS("pass"),
+    @JsonProperty("return")
     RETURN("return"),
+    @JsonProperty("wait")
     WAIT("wait");
 
     private String value;

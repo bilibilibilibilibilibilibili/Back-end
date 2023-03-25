@@ -2,6 +2,7 @@ package com.example.forumBackEnd.pojo;
 
 import com.example.forumBackEnd.pojo.enumClass.PostStatus;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -214,24 +215,15 @@ public class Post {
     }
 
     @JsonCreator
-    public Post(int author, int collections, int comment, boolean commentYorN, String content, int id,
-                String lastCommentTime, int likes, String releaseTime, List<MediaResource> mediaResources,
-                String status, List<String> tag, String title, String topComment, int views) throws IOException {
+    public Post(@JsonProperty("author") int author, @JsonProperty("commentYorN") boolean commentYorN,
+                @JsonProperty("content") String content, @JsonProperty("resources") List<MediaResource> mediaResources,
+                @JsonProperty("tag") List<String> tag, @JsonProperty("title") String title){
         this.author = author;
-        this.collections = collections;
-        this.comment = comment;
         this.commentYorN = commentYorN;
         this.content = content;
-        this.id = id;
-        this.lastCommentTime = lastCommentTime;
-        this.likes = likes;
-        this.releaseTime = releaseTime;
         this.mediaResources = mediaResources;
-        this.status = PostStatus.forValue(status);
         this.tag = tag;
         this.title = title;
-        this.topComment = topComment;
-        this.views = views;
     }
 }
 
