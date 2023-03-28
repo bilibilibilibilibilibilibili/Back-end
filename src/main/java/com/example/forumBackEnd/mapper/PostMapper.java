@@ -39,13 +39,13 @@ public interface PostMapper {
     })
     List<Post> selectPostByLastComment(@Param("offset") int offset);
 
-    @Select("SELECT * FROM post WHERE status='pass' ORDER BY releaseTime asc LIMIT #{offset},10")
+    @Select("SELECT * FROM post_table WHERE status='pass' ORDER BY releaseTime asc LIMIT #{offset},10")
     @ResultMap(value = "PostMap")
     List<Post> selectPostByTime(@Param("offset") int offset);
 
-    @Select("SELECT * FROM post WHERE id=#{id}")
+    @Select("SELECT * FROM post_table WHERE id=#{id}")
     @ResultMap(value = "PostMap")
-    Post selectPostById(@Param("id") int id);
+    List<Post> selectPostById(@Param("id") int id);
 
     @Update("UPDATE post_table SET comment=comment+1, lastComment=CURRENT_TIMESTAMP WHERE id=#{postId}")
     int updatePostOnNewComment(@Param("postId") int postId);

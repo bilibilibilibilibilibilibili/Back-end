@@ -8,6 +8,15 @@ import lombok.NoArgsConstructor;
 public class PostGetRequest {
     private String token;
     private int offset;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId() {
+        this.id = id;
+    }
 
     public String getToken() {
         return token;
