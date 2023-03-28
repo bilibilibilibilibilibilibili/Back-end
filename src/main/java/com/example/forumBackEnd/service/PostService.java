@@ -25,7 +25,15 @@ public class PostService {
         if (post.getMediaResources() == null){
             post.setMediaResources(new ArrayList<>());
         }
+        if (post.getLength() < 0){
+            post.setLength(0);
+        }
+        post.setViews(0);
+        post.setLikes(0);
+        post.setCollections(0);
+        post.setComment(0);
         post.setStatus(PostStatus.WAIT);
+
         int affectRows =  postMapper.addPost(post);
         if(affectRows <= 0){
             return 0;
@@ -57,6 +65,10 @@ public class PostService {
     public List<Post> selectPostById(int offset) {
         List<Post> postList = postMapper.selectPostById(offset);
         return postList;
+    }
+
+    public int selectCommentFloorByPostId(int postId) {
+        return postMapper.selectCommentFloorByPostId(postId);
     }
 
 }

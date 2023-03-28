@@ -2,6 +2,7 @@ package com.example.forumBackEnd.service;
 
 import com.example.forumBackEnd.mapper.CommentMapper;
 import com.example.forumBackEnd.pojo.Comment;
+import com.example.forumBackEnd.pojo.enumClass.CommentStatus;
 import com.example.forumBackEnd.util.TokenUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,10 @@ public class CommentService {
     private CommentMapper commentMapper;
 
     public Boolean addComment(Comment comment){
+        comment.setLikes(0);
+        comment.setStatus(CommentStatus.VISIBLE);
+        comment.setFloor(postService.selectCommentFloorByPostId(comment.getPostId()) + 1);
+
         int affectRow = commentMapper.addComment(comment);
         if (affectRow>0){
             return postService.updatePostOnNewComment(comment.getPostId());

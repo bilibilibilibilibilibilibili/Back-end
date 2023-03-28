@@ -50,4 +50,6 @@ public interface PostMapper {
     @Update("UPDATE post_table SET comment=comment+1, lastComment=CURRENT_TIMESTAMP WHERE id=#{postId}")
     int updatePostOnNewComment(@Param("postId") int postId);
 
+    @Select("SELECT comment FROM post_table WHERE id=#{postId}")
+    int selectCommentFloorByPostId(@Param("postId") int postId);
 }
