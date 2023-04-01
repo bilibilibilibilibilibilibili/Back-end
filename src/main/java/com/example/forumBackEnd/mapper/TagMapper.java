@@ -14,6 +14,5 @@ public interface TagMapper {
     List<Tag> findByName(@Param("name") String name);
 
     @Insert("INSERT INTO tag_table VALUES(#{name}, #{status})")
-    @ResultMap(value = "TagMap")
     int insertTag(Tag tag);
 }

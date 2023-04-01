@@ -1,10 +1,14 @@
 package com.example.forumBackEnd.pojo;
 
 import com.example.forumBackEnd.pojo.enumClass.TagStatus;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  * tag
  */
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tag {
     /**
      * tag名称

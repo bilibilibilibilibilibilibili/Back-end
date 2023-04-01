@@ -33,7 +33,7 @@ public enum TagStatus implements ValueEnum{
 //        return null;
 //    }
 
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
     public static TagStatus forValue(String value) {
         if(value == null){
             return null;
