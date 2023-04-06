@@ -39,7 +39,11 @@ public class CommentService {
         return commentList;
     }
 
-    public Comment selectCommentById(int id){
-        return commentMapper.selectCommentById(id);
+    public List<Comment> selectCommentById(int id){
+        List<Comment> commentList= commentMapper.selectCommentById(id);
+//        for(Comment comment: commentList){
+//            System.out.println(comment);
+//        }
+        return commentList;
     }
 }

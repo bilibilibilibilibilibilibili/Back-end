@@ -52,6 +52,11 @@ public class CommentController {
 
     @PostMapping("by-id")
     public BasicResponse getCommentById(@RequestBody ObjectNode request){
-        return BasicResponse.getFailResponse("获取失败");
+        int commentId = request.get("id").asInt();
+        List<Comment> commentList = commentService.selectCommentById(commentId);
+        if (commentList.size() == 0){
+            return BasicResponse.getSuccessResponse("获取失败，帖子不存在或id有误",null);
+        }
+        return BasicResponse.getSuccessResponse("获取成功，帖子id"+commentId,commentList);
     }
 }

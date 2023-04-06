@@ -26,5 +26,7 @@ public interface CommentMapper {
     })
     List<Comment> selectCommentByPost(@Param("id") int id, @Param("offset") int offset);
 
-    Comment selectCommentById(int id);
+    @Select("SELECT * FROM comment_table WHERE comment_id=#{id} AND comment_sta='ok'")
+    @ResultMap(value="CommentMap")
+    List<Comment> selectCommentById(@Param("id") int id);
 }
