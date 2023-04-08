@@ -2,6 +2,7 @@ package com.example.forumBackEnd.pojo.response;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.executor.ErrorContext;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -9,6 +10,14 @@ public class BasicResponse {
     private int code;
     private String message;
     private Object data;
+
+    public static ErrorContext error() {
+        return null;
+    }
+
+    public static ErrorContext ok() {
+        return null;
+    }
 
     public int getCode() {
         return code;

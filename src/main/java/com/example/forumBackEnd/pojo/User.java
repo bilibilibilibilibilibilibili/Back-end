@@ -111,4 +111,8 @@ public class User{
      * 账号激活时间
      */
     private LocalDateTime activationTime;
+
+    public String getUseremail() {
+        return email;
+    }
 }

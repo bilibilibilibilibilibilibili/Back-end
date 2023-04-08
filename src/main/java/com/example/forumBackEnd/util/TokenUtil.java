@@ -1,44 +1,77 @@
 package com.example.forumBackEnd.util;
 
-import com.example.forumBackEnd.pojo.enumClass.Identity;
-import com.example.forumBackEnd.pojo.User;
-import org.springframework.stereotype.Service;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.example.forumBackEnd.pojo.User;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-@Service
-public class TokenUtil {
-    /**
-     * 创建map用于存储令牌
-     */
-    private static Map<String, User> tokenMap = new HashMap<>();
-
+@Component
+public class TokenUtil{
 
     /**
-     * 根据用户名和密码，使用加密算法生成JWT的token令牌。
+     * 生成token
      * @param user
      * @return
      */
     public String generateToken(User user) {
-        String token = "";
-        String isAdmin = "";
-        Identity identity = user.getIdentity();
-        switch(identity){
-            case ADMIN,PRIOR_ADMIN,SUPER_ADMIN -> isAdmin = "admin";
-            default ->  isAdmin = "false";
-        }
         Date start = new Date();
-        Date end = new Date(System.currentTimeMillis() + 24*60*60*1000 * 7);    // 7天免登陆
-        token = JWT.create().withAudience(String.valueOf(user.getId()))
-                .withAudience(isAdmin)
-//                .withIssuedAt(start)
-//                .withExpiresAt(end)
+        long currentTime = System.currentTimeMillis() + 60* 60 * 1000;//一小时有效时间
+        Date end = new Date(currentTime);
+        String token = "";
+        token = JWT.create()
+                .withAudience(user.getId().toString())
+                .withAudience(user.getUseremail())
+                .withIssuedAt(start)
+                .withExpiresAt(end)
                 .sign(Algorithm.HMAC256(user.getPassword()));
         return token;
     }
 
-}
+
+    /**
+     *
+     * @param token
+     * @param key
+     * @return userId
+     * 获取制定token中某个属性值
+     */
+    public static String get(String token, String key) {
+        List<String> list= JWT.decode(token).getAudience();
+        String userId = JWT.decode(token).getAudience().get(0);
+        return userId;
+    }
+
+    /**
+     * 获取request
+     * @return
+     */
+    public static HttpServletRequest getRequest() {
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes();
+        return requestAttributes == null ? null : requestAttributes.getRequest();
+    }
+
+
+    /**
+     *
+     * @param request
+     * @return
+     * 获取token
+     */
+    public String getToken(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        for (Cookie c :
+                cookies) {
+            if (c.getName().equals("token")) {
+                return c.getValue();
+            }
+        }
+        return null;
+    }}
