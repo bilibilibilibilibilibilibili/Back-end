@@ -2,14 +2,12 @@ package com.example.forumBackEnd.controller;
 
 
 import com.example.forumBackEnd.pojo.Post;
-import com.example.forumBackEnd.pojo.PostDao;
 import com.example.forumBackEnd.pojo.Tag;
 import com.example.forumBackEnd.pojo.response.BasicResponse;
 import com.example.forumBackEnd.pojo.request.PostGetRequest;
 import com.example.forumBackEnd.service.PostService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.annotation.Resource;

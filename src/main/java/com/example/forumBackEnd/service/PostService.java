@@ -3,10 +3,7 @@ package com.example.forumBackEnd.service;
 
 import com.example.forumBackEnd.mapper.PostMapper;
 import com.example.forumBackEnd.pojo.Post;
-import com.example.forumBackEnd.pojo.PostDao;
-import com.example.forumBackEnd.pojo.Tag;
 import com.example.forumBackEnd.pojo.enumClass.PostStatus;
-import com.example.forumBackEnd.pojo.response.BasicResponse;
 import com.example.forumBackEnd.util.TokenUtil;
 import org.springframework.stereotype.Service;
 

@@ -15,8 +15,10 @@ public interface UserMapper {
      * @param user
      * @return
      */
-    @Insert("INSERT INTO user( email, password, salt, confirm_code, activation_time, is_valid )" +
-    "VALUES ( #{email}, #{password}, #{salt}, #{confirmCode}, #{activationTime}, #{isValid})")
+    @Insert("INSERT INTO user_table( email, password, userName, salt, confirmCode, activateTime, status, sex," +
+            "fans, follow, banTag, post, identity )" +
+    "VALUES ( #{email}, #{password}, #{userName}, #{salt}, #{confirmCode}, #{activationTime}, #{status}, #{sex}," +
+            "#{fans}, #{follow}, #{banTag}, #{post}, #{identity})")
     int insertUser(User user);
 
     /**

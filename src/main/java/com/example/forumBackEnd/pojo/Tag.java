@@ -2,6 +2,7 @@ package com.example.forumBackEnd.pojo;
 
 import com.example.forumBackEnd.pojo.enumClass.TagStatus;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
  */
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Tag {
     /**
      * tag名称
@@ -21,9 +23,6 @@ public class Tag {
      * HIDDEN -> 隐藏
      */
     private TagStatus status;
-
-    public String getName() { return name; }
-    public void setName(String value) { this.name = value; }
 
     public String getStatus() { return status.getValue(); }
     public void setStatus(String value) { this.status = TagStatus.forValue(value); }

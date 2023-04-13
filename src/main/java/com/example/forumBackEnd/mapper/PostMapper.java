@@ -3,8 +3,6 @@ package com.example.forumBackEnd.mapper;
 import com.example.forumBackEnd.mapper.typeHandler.*;
 import com.example.forumBackEnd.mapper.typeHandler.enumTypeHandler.PostStatusTypeHandler;
 import com.example.forumBackEnd.pojo.Post;
-import com.example.forumBackEnd.pojo.PostDao;
-import com.example.forumBackEnd.pojo.enumClass.PostStatus;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 

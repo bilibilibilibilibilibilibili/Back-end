@@ -1,14 +1,16 @@
 package com.example.forumBackEnd.controller;
 
 import com.example.forumBackEnd.pojo.User;
+import com.example.forumBackEnd.pojo.response.BasicResponse;
 import com.example.forumBackEnd.service.UserService;
+import com.example.forumBackEnd.util.TokenUtil;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import static jakarta.servlet.http.HttpServletResponse.SC_NOT_ACCEPTABLE;
 
 @RestController
 @RequestMapping(path="user",produces = "application/json; charset=UTF-8")
@@ -18,19 +20,23 @@ public class UserController {
     private UserService userService;
 
     /**
-     *  注册账号
+     *  使用邮箱注册账号
      * @param user
      * @return
      */
-    @PostMapping("create")
-    public Map<String, Object> createAccount(User user){
-        return  userService.createAccount(user);
+    @PostMapping("register-by-email")
+    public BasicResponse createAccount(@RequestBody User user){
+        boolean result = userService.createAccount(user);
+        if(result) {
+            Map<String,String> responseBody = new HashMap<>();
+            responseBody.put("token", new TokenUtil().generateToken(user.getEmail()));
+            return BasicResponse.getSuccessResponse("注册成功", responseBody);
+        }
+        return BasicResponse.getFailResponse(SC_NOT_ACCEPTABLE,"注册失败");
     }
 
     /**
-     * 登陆账号
-     * @param user
-     * @return
+     * 登陆账号++++
      */
     @PostMapping("login")
     public Map<String, Object> loginAccount(User user){

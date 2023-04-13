@@ -5,13 +5,17 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.example.forumBackEnd.mapper.UserMapper;
 import com.example.forumBackEnd.pojo.User;
+import com.example.forumBackEnd.pojo.enumClass.Identity;
+import com.example.forumBackEnd.pojo.enumClass.SexEnum;
 import com.example.forumBackEnd.pojo.enumClass.UserStatus;
 import com.example.forumBackEnd.util.TokenUtil;
+import com.example.forumBackEnd.util.UsernameUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +35,7 @@ public class UserService {
      * @return
      */
     @Transactional
-    public Map<String, Object> createAccount(User user){   //因为返回的是json所以直接用map收集对象
+    public boolean createAccount(User user){   //因为返回的是json所以直接用map收集对象
         //雪花算法生成确认码
         String confirmCode = IdUtil.getSnowflake(1,1).nextIdStr();
         //盐(加密用）
@@ -45,21 +49,24 @@ public class UserService {
         user.setPassword(md5Pwd);
         user.setConfirmCode(confirmCode);
         user.setActivationTime(ldt);
+        user.setUserName(UsernameUtil.getRandomGuestName());
         user.setStatus(UserStatus.GUEST);
+        user.setIdentity(Identity.STUDENT);
+        user.setSex(SexEnum.UNKNOWN);
+        user.setBanTag(new ArrayList<>());
+        user.setFans(new ArrayList<>());
+        user.setFollow(new ArrayList<>());
+        user.setPost(new ArrayList<>());
         //新增账号
         int result = userMapper.insertUser(user);
-        Map<String, Object> resultMap = new HashMap<>();
         if (result > 0){
             //发送邮件
-            String activationUrl = "http://localhost:8080/user/activation?confirmCode=" + confirmCode;
-            mailService.sendMailForActivationAccount(activationUrl,user.getEmail());
-            resultMap.put("code",200);
-            resultMap.put("message","注册成功，请前往邮箱激活账号");
+//            String activationUrl = "http://localhost:8080/user/activation?confirmCode=" + confirmCode;
+//            mailService.sendMailForActivationAccount(activationUrl,user.getEmail());
+            return true;
         }else{
-            resultMap.put("code",400);
-            resultMap.put("message","注册失败");
+            return false;
         }
-        return resultMap;
     }
 
 
@@ -89,7 +96,7 @@ public class UserService {
             resultMap.put("message","用户名或密码错误");
             return resultMap;
         }
-        String token= tokenUtil.generateToken(user);
+        String token= tokenUtil.generateToken(user.getEmail());
         resultMap.put("code",200);
         resultMap.put("message","登陆成功");
         resultMap.put("token",token);

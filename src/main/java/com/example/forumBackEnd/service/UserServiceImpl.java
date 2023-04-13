@@ -24,21 +24,21 @@ public class UserServiceImpl implements IUserService {
     TokenUtil tokenUtil;
 
 
-    public ErrorContext loginCheck(User user, HttpServletResponse response) {
-        User user2 = (User) userMapper.selectUserByEmail(user.getUseremail());
-        if (user2 == null) {
-            return BasicResponse.error().message("该用户不存在！");
-        }
-        if (!user2.getPassword().equals(user.getPassword())) {
-            return BasicResponse.error().message("密码错误！");
-        }
-        String token = tokenUtil.generateToken(user2);
-        Cookie cookie = new Cookie("token", token);
-//        设置cookie的作用域：为”/“时，以在webapp文件夹下的所有应用共享cookie
-        cookie.setPath("/");
-        response.addCookie(cookie);
-        return BasicResponse.ok().message("登录成功！");
-    }
+//    public ErrorContext loginCheck(User user, HttpServletResponse response) {
+//        User user2 = (User) userMapper.selectUserByEmail(user.getUseremail());
+//        if (user2 == null) {
+//            return BasicResponse.error().message("该用户不存在！");
+//        }
+//        if (!user2.getPassword().equals(user.getPassword())) {
+//            return BasicResponse.error().message("密码错误！");
+//        }
+//        String token = tokenUtil.generateToken(user2);
+//        Cookie cookie = new Cookie("token", token);
+////        设置cookie的作用域：为”/“时，以在webapp文件夹下的所有应用共享cookie
+//        cookie.setPath("/");
+//        response.addCookie(cookie);
+//        return BasicResponse.ok().message("登录成功！");
+//    }
 
     @Override
     public void sayHello() {

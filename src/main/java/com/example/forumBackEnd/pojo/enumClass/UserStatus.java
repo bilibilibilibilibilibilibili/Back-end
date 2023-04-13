@@ -1,5 +1,8 @@
 package com.example.forumBackEnd.pojo.enumClass;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.IOException;
 import java.util.stream.Stream;
 
@@ -7,9 +10,13 @@ import java.util.stream.Stream;
  * 账号状态
  */
 public enum UserStatus implements ValueEnum{
+    @JsonProperty("ban")
     BAN("ban"),
+    @JsonProperty("cancel")
     CANCEL("cancel"),
+    @JsonProperty("guest")
     GUEST("guest"),
+    @JsonProperty("normal")
     NORMAL("normal");
 
     private String value;
@@ -31,8 +38,8 @@ public enum UserStatus implements ValueEnum{
 //        }
 //        return null;
 //    }
-
-    public static UserStatus forValue(String value) throws IOException {
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public static UserStatus forValue(String value){
         if(value == null){
             return null;
         }

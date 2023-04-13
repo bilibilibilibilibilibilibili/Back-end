@@ -81,4 +81,12 @@ public class BasicResponse {
     public static BasicResponse getFailResponse(String msg){
         return new BasicResponse(404, msg, null);
     }
+
+    /**
+     * 生成指定状态码与错误信息的错误状态回复
+     * @param msg 错误信息
+     */
+    public static BasicResponse getFailResponse(int code, String msg){
+        return new BasicResponse(code, msg, null);
+    }
 }
