@@ -1,5 +1,7 @@
 package com.example.forumBackEnd.pojo.enumClass;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.IOException;
 import java.util.stream.Stream;
 
@@ -7,8 +9,11 @@ import java.util.stream.Stream;
  * 性别（生理）
  */
 public enum SexEnum implements ValueEnum{
+    @JsonProperty("male")
     MALE("male"),
+    @JsonProperty("female")
     FEMALE("female"),
+    @JsonProperty("unknown")
     UNKNOWN("unknown");
 
     private String value;

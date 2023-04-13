@@ -26,7 +26,7 @@ public class LoginInterceptorConfig implements WebMvcConfigurer{
                 .addPathPatterns("/**")
                 //添加白名单路径
                 .excludePathPatterns("/swagger-resources/**")
-                .excludePathPatterns("/user/login")
+                .excludePathPatterns("/user/login-by-email")
                 .excludePathPatterns("/user/register-by-email");
     }
 

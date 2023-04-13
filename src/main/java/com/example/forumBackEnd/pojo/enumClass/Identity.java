@@ -1,5 +1,7 @@
 package com.example.forumBackEnd.pojo.enumClass;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.IOException;
 import java.util.stream.Stream;
 
@@ -7,11 +9,17 @@ import java.util.stream.Stream;
  * 账号身份与权限
  */
 public enum Identity implements ValueEnum{
+    @JsonProperty("admin")
     ADMIN("admin"),
+    @JsonProperty("organization")
     ORGANIZATION("organization"),
+    @JsonProperty("prior_admin")
     PRIOR_ADMIN("prior_admin"),
+    @JsonProperty("student")
     STUDENT("student"),
+    @JsonProperty("super_admin")
     SUPER_ADMIN("super_admin"),
+    @JsonProperty("teacher")
     TEACHER("teacher");
 
     private String value;

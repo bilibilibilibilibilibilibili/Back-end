@@ -41,8 +41,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         String token = request.getHeader("token");
         tokenUtil.verifyToken(token);
         if (TokenUtil.result) {
-            String email = tokenUtil.getEmailFromToken(token);
-            request.setAttribute("email", email);
+//            String email = tokenUtil.getEmailFromToken(token);
+//            request.setAttribute("email", email);
             return true;
         } else {
             ObjectMapper mapper = new ObjectMapper();

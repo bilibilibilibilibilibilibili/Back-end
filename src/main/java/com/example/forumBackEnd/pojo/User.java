@@ -2,7 +2,6 @@ package com.example.forumBackEnd.pojo;
 import com.example.forumBackEnd.pojo.enumClass.Identity;
 import com.example.forumBackEnd.pojo.enumClass.SexEnum;
 import com.example.forumBackEnd.pojo.enumClass.UserStatus;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;
 import lombok.Data;   //自动构造setter，getter，builder，@RequiredArgsConstructor，@ToString，@EqualsAndHashCode
 import lombok.NoArgsConstructor;
@@ -111,7 +110,9 @@ public class User{
     /**
      * 账号激活时间
      */
-    private LocalDateTime activationTime;
-
-
+    private LocalDateTime activateTime;
+    /**
+     * 头像
+     */
+    private String bandage;
 }
