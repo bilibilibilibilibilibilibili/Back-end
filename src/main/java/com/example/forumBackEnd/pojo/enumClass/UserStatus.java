@@ -10,14 +10,14 @@ import java.util.stream.Stream;
  * 账号状态
  */
 public enum UserStatus implements ValueEnum{
-    @JsonProperty("ban")
-    BAN("ban"),
-    @JsonProperty("cancel")
-    CANCEL("cancel"),
-    @JsonProperty("guest")
-    GUEST("guest"),
-    @JsonProperty("normal")
-    NORMAL("normal");
+    @JsonProperty("BAN")
+    BAN("BAN"),
+    @JsonProperty("CANCEL")
+    CANCEL("CANCEL"),
+    @JsonProperty("GUEST")
+    GUEST("GUEST"),
+    @JsonProperty("NORMAL")
+    NORMAL("NORMAL");
 
     private String value;
 

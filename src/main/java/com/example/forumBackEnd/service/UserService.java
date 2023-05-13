@@ -37,7 +37,8 @@ public class UserService {
     @Transactional
     public int createAccount(User user){   //因为返回的是json所以直接用map收集对象
         User dbUser = userMapper.selectUserByEmail(user.getEmail());
-        if (null != dbUser){
+//        System.out.println(dbUser);
+        if (null == dbUser){
             //雪花算法生成确认码
             String confirmCode = IdUtil.getSnowflake(1,1).nextIdStr();
             //盐(加密用）
@@ -61,6 +62,7 @@ public class UserService {
             user.setPost(new ArrayList<>());
             //新增账号
             int result = userMapper.insertUser(user);
+//            int result = 1;
             if (result > 0){
                 //发送邮件
 //            String activationUrl = "http://localhost:8080/user/activation?confirmCode=" + confirmCode;

@@ -7,12 +7,12 @@ import java.util.stream.Stream;
 
 public enum TagStatus implements ValueEnum{
     // Jackson2.6及以上版本支持
-    @JsonProperty("hit")
-    HIT("hit"),
-    @JsonProperty("normal")
-    NORMAL("normal"),
-    @JsonProperty("hidden")
-    HIDDEN("hidden");
+    @JsonProperty("HIT")
+    HIT("HIT"),
+    @JsonProperty("NORMAL")
+    NORMAL("NORMAL"),
+    @JsonProperty("HIDDEN")
+    HIDDEN("HIDDEN");
 
     private final String value;
 

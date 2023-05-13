@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 public enum CommentStatus implements ValueEnum{
-    @JsonProperty("ok")
-    VISIBLE("ok"),
-    @JsonProperty("deleted")
-    INVISIBLE("deleted"),
-    @JsonProperty("wait")
-    WAIT("wait");
+    @JsonProperty("OK")
+    VISIBLE("OK"),
+    @JsonProperty("DELETED")
+    INVISIBLE("DELETED"),
+    @JsonProperty("WAIT")
+    WAIT("WAIT");
 
     private String value;
 

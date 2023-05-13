@@ -9,18 +9,18 @@ import java.util.stream.Stream;
  * 账号身份与权限
  */
 public enum Identity implements ValueEnum{
-    @JsonProperty("admin")
-    ADMIN("admin"),
-    @JsonProperty("organization")
-    ORGANIZATION("organization"),
-    @JsonProperty("prior_admin")
-    PRIOR_ADMIN("prior_admin"),
-    @JsonProperty("student")
-    STUDENT("student"),
-    @JsonProperty("super_admin")
-    SUPER_ADMIN("super_admin"),
-    @JsonProperty("teacher")
-    TEACHER("teacher");
+    @JsonProperty("ADMIN")
+    ADMIN("ADMIN"),
+    @JsonProperty("ORGANIZATION")
+    ORGANIZATION("ORGANIZATION"),
+    @JsonProperty("PRIOR_ADMIN")
+    PRIOR_ADMIN("PRIOR_ADMIN"),
+    @JsonProperty("STUDENT")
+    STUDENT("STUDENT"),
+    @JsonProperty("SUPER_ADMIN")
+    SUPER_ADMIN("SUPER_ADMIN"),
+    @JsonProperty("TEACHER")
+    TEACHER("TEACHER");
 
     private String value;
 

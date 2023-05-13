@@ -9,12 +9,12 @@ import java.util.stream.Stream;
  * 性别（生理）
  */
 public enum SexEnum implements ValueEnum{
-    @JsonProperty("male")
-    MALE("male"),
-    @JsonProperty("female")
-    FEMALE("female"),
-    @JsonProperty("unknown")
-    UNKNOWN("unknown");
+    @JsonProperty("MALE")
+    MALE("MALE"),
+    @JsonProperty("FEMALE")
+    FEMALE("FEMALE"),
+    @JsonProperty("UNKNOWN")
+    UNKNOWN("UNKNOWN");
 
     private String value;
 

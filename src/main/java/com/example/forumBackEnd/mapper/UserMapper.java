@@ -19,7 +19,7 @@ public interface UserMapper {
      */
     @Insert("INSERT INTO user_table( email, password, userName, salt, confirmCode, activateTime, status, sex," +
             "fans, follow, banTag, post, identity )" +
-    "VALUES ( #{email}, #{password}, #{userName}, #{salt}, #{confirmCode}, #{activationTime}, #{status}, #{sex}," +
+    "VALUES ( #{email}, #{password}, #{userName}, #{salt}, #{confirmCode}, #{activateTime}, #{status}, #{sex}," +
             "#{fans}, #{follow}, #{banTag}, #{post}, #{identity})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertUser(User user);

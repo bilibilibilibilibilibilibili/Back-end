@@ -9,9 +9,9 @@ import org.apache.ibatis.type.JdbcType;
 import java.util.List;
 
 public interface PostMapper {
-    @Insert("INSERT INTO post_table(author, title, content, resources, tag, length, comment_Yor) " +
+    @Insert("INSERT INTO post_table(author, title, content, resources, tag, length, comment_Yor, status) " +
             "VALUES(#{author}, #{title}, #{content}, #{mediaResources}, #{tag}, #{length}," +
-            "#{commentYorN, jdbcType=INTEGER})")
+            "#{commentYorN, jdbcType=INTEGER}, #{status})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int addPost(Post post);
 

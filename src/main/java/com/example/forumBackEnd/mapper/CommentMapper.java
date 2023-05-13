@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 public interface CommentMapper {
-    @Insert("INSERT INTO comment_table(user_id, floor, content, reference_c, post_id, comment_ip)" +
-            "VALUES(#{userId}, #{floor}, #{content}, #{reference}, #{postId}, #{ip})")
+    @Insert("INSERT INTO comment_table(user_id, floor, content, reference_c, post_id, comment_ip, comment_sta)" +
+            "VALUES(#{userId}, #{floor}, #{content}, #{reference}, #{postId}, #{ip}, #{status})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int addComment(Comment comment);
 

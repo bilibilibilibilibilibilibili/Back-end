@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 public enum PostStatus implements ValueEnum{
-    @JsonProperty("pass")
-    PASS("pass"),
-    @JsonProperty("return")
-    RETURN("return"),
-    @JsonProperty("wait")
-    WAIT("wait");
+    @JsonProperty("PASS")
+    PASS("PASS"),
+    @JsonProperty("RETURN")
+    RETURN("RETURN"),
+    @JsonProperty("WAIT")
+    WAIT("WAIT");
 
     private String value;
 
