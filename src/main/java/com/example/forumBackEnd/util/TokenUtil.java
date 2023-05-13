@@ -41,9 +41,9 @@ public class TokenUtil{
 
     public void verifyToken(String token){
         try {
-            if (null == token) {
+            if (null == token || token.equals("")) {
                 result = false;
-                message = "token为空";
+                message = "token is empty";
                 return;
             }
 
@@ -58,17 +58,17 @@ public class TokenUtil{
             String email = jwt.getClaim("email").asString();
             if (("").equals(email) || null==email) {
                 result = false;
-                message = "用户信息异常";
+                message = "user info exception";
                 return;
             }
         }catch (JWTVerificationException e){
             //无效的签名/声明
             result = false;
-            message = "token已过期";
+            message = "token is expired";
             e.printStackTrace();
         }
         result = true;
-        message = "token验证成功";
+        message = "token confirm";
     }
 
     public String getEmailFromToken(String token){

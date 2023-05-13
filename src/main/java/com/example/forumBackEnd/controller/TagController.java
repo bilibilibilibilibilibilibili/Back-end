@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
 
+import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
+
 @RestController
 @RequestMapping(path = "tag", produces = "application/json; charset=UTF-8")
 public class TagController {
@@ -37,9 +39,9 @@ public class TagController {
         return BasicResponse.getFailResponse("获取热门tag失败");
     }
 
-    @PostMapping("get-tag-by-name")
+    @PostMapping("by-name")
     public BasicResponse getTagsByName(@RequestBody ObjectNode request){
 
-        return BasicResponse.getFailResponse("获取热门tag失败");
+        return BasicResponse.getFailResponse(SC_NOT_FOUND,"获取热门tag失败");
     }
 }
