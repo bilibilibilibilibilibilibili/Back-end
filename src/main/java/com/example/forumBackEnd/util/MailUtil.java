@@ -1,8 +1,9 @@
-package com.example.forumBackEnd.service;
+package com.example.forumBackEnd.util;
 
 import jakarta.annotation.Resource;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -13,17 +14,17 @@ import org.thymeleaf.context.Context;
 import java.util.Date;
 
 @Service
-public class MailService {
+public class MailUtil {
 
-     @Value("${spring.mail.username}")
+    @Value("${spring.mail.username}")
     private String mailUsername;
-     @Resource
+    @Autowired
     private JavaMailSender javaMailSender;
-     @Resource
+    @Resource
     private TemplateEngine templateEngine;
 
     /**
-     * 激活账号邮件发送
+     * 发送激活地址邮件
      * @param activationUrl 激活url链接地址
      * @param email  收件人邮箱
      */
@@ -45,8 +46,8 @@ public class MailService {
              //设置邮件发送日期
              message.setSentDate(new Date());
              //创建上下文环境
-             Context context =  new Context();
-             context.setVariable("activationUrl",activationUrl);
+             Context context = new Context();
+             context.setVariable("url",activationUrl);
              String text = templateEngine.process("activation-account.html",context);
             //设置邮件正文
              message.setText(text,true);
@@ -55,6 +56,7 @@ public class MailService {
          }
          //邮件发送
          javaMailSender.send(mimeMessage);
+         System.out.println("email sent");
      }
 
 

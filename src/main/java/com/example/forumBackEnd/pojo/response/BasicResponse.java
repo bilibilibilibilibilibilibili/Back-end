@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.executor.ErrorContext;
 
-import static jakarta.servlet.http.HttpServletResponse.SC_OK;
-import static jakarta.servlet.http.HttpServletResponse.SC_SERVICE_UNAVAILABLE;
+import static jakarta.servlet.http.HttpServletResponse.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -74,7 +73,7 @@ public class BasicResponse {
      * 生成默认错误状态回复
      */
     public static BasicResponse getFailResponse(){
-        return new BasicResponse(SC_SERVICE_UNAVAILABLE, "请求发生错误", null);
+        return new BasicResponse(SC_INTERNAL_SERVER_ERROR, "请求发生错误", null);
     }
 
     /**
@@ -82,7 +81,7 @@ public class BasicResponse {
      * @param msg 错误信息
      */
     public static BasicResponse getFailResponse(String msg){
-        return new BasicResponse(SC_SERVICE_UNAVAILABLE, msg, null);
+        return new BasicResponse(SC_INTERNAL_SERVER_ERROR, msg, null);
     }
 
     /**

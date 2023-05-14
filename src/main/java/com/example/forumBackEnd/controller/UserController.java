@@ -5,13 +5,14 @@ import com.example.forumBackEnd.pojo.response.BasicResponse;
 import com.example.forumBackEnd.service.UserService;
 import com.example.forumBackEnd.util.TokenUtil;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import static jakarta.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
-import static jakarta.servlet.http.HttpServletResponse.SC_NOT_ACCEPTABLE;
+import static jakarta.servlet.http.HttpServletResponse.*;
 
 @RestController
 @RequestMapping(path="user",produces = "application/json; charset=UTF-8")
@@ -31,7 +32,8 @@ public class UserController {
         switch (result) {
             case 0 -> {
                 Map<String,String> responseBody = new HashMap<>();
-                responseBody.put("token", new TokenUtil().generateToken(user.getEmail()));
+//                System.out.println(user.getId());
+                responseBody.put("token", new TokenUtil().generateToken(user.getId()));
                 return BasicResponse.getSuccessResponse("注册成功", responseBody);
             }
             case 1 -> {
@@ -66,11 +68,15 @@ public class UserController {
 
     /**
      * 激活账号
-     * @param confirmCode
      * @return
      */
     @GetMapping("activation")
-    public Map<String,Object> activationAccount(String confirmCode){
-        return userService.activationAccount(confirmCode);
+    public BasicResponse activationAccount(HttpServletRequest request){
+        int resultCode = userService.activationAccount(request.getParameter("userId"), request.getParameter("confirmCode"));
+        switch(resultCode){
+            case SC_OK -> { return BasicResponse.getSuccessResponse("激活成功", null); }
+            case SC_BAD_REQUEST -> { return BasicResponse.getFailResponse(SC_BAD_REQUEST, "链接已失效，请重新注册"); }
+            default -> { return BasicResponse.getFailResponse("由于服务器内部原因，激活失败"); }
+        }
     }
 }

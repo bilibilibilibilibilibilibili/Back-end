@@ -25,15 +25,15 @@ public class TokenUtil{
 
     /**
      * 生成token
-     * @param email
-     * @return
+     * @param id
+     * @return token
      */
-    public String generateToken(String email) {
+    public String generateToken(String id) {
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + expiration*1000);
         return JWT.create()
                 .withIssuer(issuer)
-                .withClaim("email",email)
+                .withClaim("userId",id)
                 .withIssuedAt(now)
                 .withExpiresAt(expirationDate)
                 .sign(Algorithm.HMAC256(secret));
@@ -49,18 +49,19 @@ public class TokenUtil{
 
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTVerifier verifier = JWT.require(algorithm)  //verifier 可复用
-                    .withIssuer(issuer) //匹配指定的token发布者
+                    .withIssuer(issuer) // 设定token发布者
                     .build();
             DecodedJWT jwt = verifier.verify(token);  //解码jwt
             String decodeIssuer = jwt.getIssuer();
 
             // 验证自定义参数
-            String email = jwt.getClaim("email").asString();
-            if (("").equals(email) || null==email) {
+            String userId = jwt.getClaim("userId").asString();
+            if (("").equals(userId) || null==userId) {
                 result = false;
-                message = "user info exception";
+                message = "invalid user info";
                 return;
             }
+            // todo 进一步验证
         }catch (JWTVerificationException e){
             //无效的签名/声明
             result = false;
@@ -71,8 +72,8 @@ public class TokenUtil{
         message = "token confirm";
     }
 
-    public String getEmailFromToken(String token){
-        return JWT.decode(token).getClaim("email").asString();
+    public String getIdFromToken(String token){
+        return JWT.decode(token).getClaim("userId").asString();
     }
 
 //    /**

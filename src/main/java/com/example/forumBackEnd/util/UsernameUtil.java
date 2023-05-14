@@ -1,9 +1,10 @@
 package com.example.forumBackEnd.util;
 
 import org.junit.Test;
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
-
+@Service
 public class UsernameUtil {
 
     public static String getRandomGuestName(){

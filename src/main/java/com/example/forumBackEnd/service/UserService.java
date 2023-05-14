@@ -8,6 +8,7 @@ import com.example.forumBackEnd.pojo.User;
 import com.example.forumBackEnd.pojo.enumClass.Identity;
 import com.example.forumBackEnd.pojo.enumClass.SexEnum;
 import com.example.forumBackEnd.pojo.enumClass.UserStatus;
+import com.example.forumBackEnd.util.MailUtil;
 import com.example.forumBackEnd.util.TokenUtil;
 import com.example.forumBackEnd.util.UsernameUtil;
 import jakarta.annotation.Resource;
@@ -20,6 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static jakarta.servlet.http.HttpServletResponse.*;
+
 @Service
 public class UserService {
 
@@ -28,7 +31,7 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
     @Resource
-    private MailService mailService;
+    private MailUtil mailUtil;
     /**
      * 注册账号
      * @param user
@@ -65,14 +68,15 @@ public class UserService {
 //            int result = 1;
             if (result > 0){
                 //发送邮件
-//            String activationUrl = "http://localhost:8080/user/activation?confirmCode=" + confirmCode;
-//            mailService.sendMailForActivationAccount(activationUrl,user.getEmail());
-                return 0;
+                System.out.println("database added, sending email");
+                String activationUrl = "http://localhost:8080/user/activation?userId="+user.getId()+"&confirmCode=" + confirmCode;
+                mailUtil.sendMailForActivationAccount(activationUrl, user.getEmail());
+                return 0;  // 成功
             }else{
-                return 1;
+                return 1;  // 因为mybatis内部错误失败
             }
         }
-        return 2;
+        return 2;  // 邮箱已被注册
     }
 
     /**
@@ -101,30 +105,20 @@ public class UserService {
      * @param confirmCode
      * @return
      */
-    public Map<String, Object> activationAccount(String confirmCode) {
-        Map<String, Object> resultMap = new HashMap<>();
+    public int activationAccount(String userId, String confirmCode) {
         //根据确认码查询用户
         User user = userMapper.selectUserByConfirmCode(confirmCode);
+        if(null == user){ return SC_BAD_REQUEST; }
         //判断激活时间是否超时
-        boolean after = LocalDateTime.now().isAfter(user.getActivateTime());
-        if (after) {
-            resultMap.put("code", 400);
-            resultMap.put("message", "链接已失效，请重新注册");
-            return resultMap;
-        }
-        //根据确认码查询用户并修改状态值为1（可用）
-        int result = userMapper.updateUserByConfirmCode(confirmCode);
+        LocalDateTime now = LocalDateTime.now();
+        if (now.isAfter(user.getActivateTime())) { return SC_BAD_REQUEST; }
+        //根据id修改状态值为NORMAL（可用）
+        int result = userMapper.activateUserById(userId);
         if (result > 0) {
-            resultMap.put("code", 200);
-            resultMap.put("message", "激活成功");
+            return SC_OK;
         } else {
-            resultMap.put("code", 400);
-            resultMap.put("message", "激活失败");
+            return SC_INTERNAL_SERVER_ERROR;
         }
-        return resultMap;
-    }
-    public String selectPasswordById(int id) {
-        return userMapper.selectPasswordById(id);
     }
 
     private boolean verifyUser(User user, User dbUser) {

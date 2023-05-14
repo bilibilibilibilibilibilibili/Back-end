@@ -1,8 +1,12 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>激活邮件</title>
+</head>
 <body>
-    Email地址验证<br>
-
-    请点击下方的链接激活账号即可：<br>
-<a th:href="@{${activationUrl}}"><span th:text="${activationUrl}"></span></a><br/>
+<h1 th:text="${title}">激活邮件</h1>
+<p th:text="${content}">请在24小时内点击下面的链接激活您的账户：</p>
+<a th:href="@{${url}}" th:text="${url}">激活链接</a>
 </body>
 </html>

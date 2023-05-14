@@ -8,8 +8,6 @@ import com.example.forumBackEnd.pojo.User;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 
-import java.util.List;
-
 public interface UserMapper {
 
     /**
@@ -25,20 +23,21 @@ public interface UserMapper {
     int insertUser(User user);
 
     /**
-     * 根据确认码查询用户
-     * @param confirmCode
+     * 根据id查询用户
+     * @param id
      * @return
      */
-    @Select("SELECT email, activation_time FROM user WHERE confirm_code = #{confirmCode} AND is_valid =0")
-    User selectUserByConfirmCode(@Param("confirmCode") String confirmCode);
+    @Select("SELECT * FROM user_table WHERE id=#{id}")
+    @ResultMap(value = "UserMap")
+    User selectUserById(@Param("id") String id);
 
     /**
-     * 根据确认码查询用户并修改状态值为1（可用）
-     * @param confirmCode
+     * 根据id修改状态值为NORMAL（可用）
+     * @param userId
      * @return
      */
-    @Update("UPDATE user SET is_valid =1 WHERE confirm_code = #{confirmCode}")
-    int updateUserByConfirmCode(@Param("confirmCode") String confirmCode);
+    @Update("UPDATE user_table SET status='NORMAL' WHERE id=#{id} AND status!='CANCEL' ")
+    int activateUserById(@Param("id") String userId);
 
     /**
      * 根据邮箱查询用户
@@ -73,5 +72,9 @@ public interface UserMapper {
 
     @Select("SELECT password FROM user WHERE id = #{id} AND is_valid = 1 ")
     String selectPasswordById(@Param("id")int id);
+
+    @Select("SELECT id,activateTime FROM user_table WHERE confirmCode=#{confirmCode}")
+    @ResultMap(value = "UserMap")
+    User selectUserByConfirmCode(@Param("confirmCode") String confirmCode);
 
 }

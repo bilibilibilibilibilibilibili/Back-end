@@ -7,13 +7,16 @@ spring:
   mail:
     protocol: smtp
     host: smtp.163.com
-    username:  EMLAT2022@163.com #????
-    password:  LIXYCSNNWOEBCGAL #???
-    port: 25 #163??
+    username:  EMLAT@163.com  # 以后创建团队邮箱
+    password:  IMDWVGETDLWTMEAQ  # 网易邮箱授权码
+    port: 465
     default-encoding: UTF-8 #??
     properties:
       mail:
-        debug: true #????????
+        debug: true
+        smtp:
+          ssl:
+            enable: true
 
 mybatis:
   configuration:
