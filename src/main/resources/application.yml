@@ -7,8 +7,8 @@ spring:
   mail:
     protocol: smtp
     host: smtp.163.com
-    username:  EMLAT@163.com  # 以后创建团队邮箱
-    password:  IMDWVGETDLWTMEAQ  # 网易邮箱授权码
+    username:  emlat_official@163.com  # 以后创建团队邮箱
+    password:  QZCLNCXWSTRAMZAP  # 网易邮箱授权码
     port: 465
     default-encoding: UTF-8 #??
     properties:

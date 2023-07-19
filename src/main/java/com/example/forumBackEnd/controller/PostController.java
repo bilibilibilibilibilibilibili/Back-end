@@ -95,7 +95,7 @@ public class PostController {
     @JsonIgnoreProperties(ignoreUnknown = true)    // 仅供测试
     public BasicResponse selectPostByLastComment(@RequestBody PostGetRequest request) {
         int offset = request.getOffset();
-        List<Post> postList =  postService.selectPostByLastComment(offset);
+        List<Post> postList = postService.selectPostByLastComment(offset);
 //        for(Post post:postList){
 //            System.out.println(post);
 //        }

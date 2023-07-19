@@ -77,4 +77,6 @@ public interface UserMapper {
     @ResultMap(value = "UserMap")
     User selectUserByConfirmCode(@Param("confirmCode") String confirmCode);
 
+
+
 }
