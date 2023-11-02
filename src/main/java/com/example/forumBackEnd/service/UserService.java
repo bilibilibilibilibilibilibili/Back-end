@@ -95,9 +95,9 @@ public class UserService {
         boolean verify = verifyUser(user, dbUser);
         //密码不一致，返回：用户名或密码错误
         if(!verify){
-            return 1;
+            return -1;
         }
-        return 2;
+        return dbUser.getId();
     }
 
     /**

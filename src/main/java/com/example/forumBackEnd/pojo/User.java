@@ -43,7 +43,7 @@ public class User{
     /**
      * 用户uid
      */
-    private String id;
+    private int id;
     /**
      * 账号身份与权限
      * ADMIN -> 管理员

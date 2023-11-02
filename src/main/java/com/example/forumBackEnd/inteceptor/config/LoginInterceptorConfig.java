@@ -23,12 +23,15 @@ public class LoginInterceptorConfig implements WebMvcConfigurer{
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(loginInterceptor)
                 //添加拦截路径
-                .addPathPatterns("/**")
+//                .addPathPatterns("/**")
                 //添加白名单路径
                 .excludePathPatterns("/swagger-resources/**")
                 .excludePathPatterns("/user/login-by-email")
                 .excludePathPatterns("/user/register-by-email")
-                .excludePathPatterns("/user/activation");
+                .excludePathPatterns("/user/activation")
+                .excludePathPatterns("/**/login")
+                .excludePathPatterns("/**/registry")
+                .excludePathPatterns("/error");
     }
 
 //    /**

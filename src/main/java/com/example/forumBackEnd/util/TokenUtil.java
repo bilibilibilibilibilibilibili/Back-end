@@ -28,7 +28,7 @@ public class TokenUtil{
      * @param id
      * @return token
      */
-    public String generateToken(String id) {
+    public String generateToken(int id) {
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + expiration*1000);
         return JWT.create()
@@ -72,8 +72,8 @@ public class TokenUtil{
         message = "token confirm";
     }
 
-    public String getIdFromToken(String token){
-        return JWT.decode(token).getClaim("userId").asString();
+    public int getIdFromToken(String token){
+        return JWT.decode(token).getClaim("userId").asInt();
     }
 
 //    /**

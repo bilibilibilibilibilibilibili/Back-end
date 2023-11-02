@@ -49,21 +49,25 @@ public class UserController {
     @PostMapping("login-by-email")
     public BasicResponse loginAccount(@RequestBody User user){
         int result = userService.loginAccount(user);
-        switch (result) {
-            case 0 -> {
-                return BasicResponse.getFailResponse(SC_NOT_ACCEPTABLE,"找不到用户");
+        try{
+            switch (result) {
+                case 0 -> {
+                    return BasicResponse.getFailResponse(SC_NOT_ACCEPTABLE,"找不到用户");
+                }
+                case -1 -> {
+                    return BasicResponse.getFailResponse(SC_NOT_ACCEPTABLE,"密码错误");
+                }
+                default -> {
+//                    System.out.println("userId: "+result);
+                    Map<String,String> responseBody = new HashMap<>();
+                    responseBody.put("token", new TokenUtil().generateToken(result));
+                    return BasicResponse.getSuccessResponse("登录成功", responseBody);
+                }
             }
-            case 1 -> {
-                return BasicResponse.getFailResponse(SC_NOT_ACCEPTABLE,"密码错误");
-            }
-            case 2 -> {
-                Map<String,String> responseBody = new HashMap<>();
-                responseBody.put("token", new TokenUtil().generateToken(user.getEmail()));
-                return BasicResponse.getSuccessResponse("登录成功", responseBody);
-            }
+        }catch (Exception e){
+            System.out.println("服务器内部错误");
+            return BasicResponse.getFailResponse(SC_INTERNAL_SERVER_ERROR, "服务器出现内部错误");
         }
-        System.out.println("服务器内部错误");
-        return BasicResponse.getFailResponse(SC_INTERNAL_SERVER_ERROR, "服务器出现内部错误");
     }
 
     /**
