@@ -20,6 +20,8 @@ public class UserController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private TokenUtil tokenUtil;
 
     /**
      *  使用邮箱注册账号
@@ -79,4 +81,18 @@ public class UserController {
             default -> { return BasicResponse.getFailResponse("由于服务器内部原因，激活失败"); }
         }
     }
+
+    /**
+     *
+     * @param request
+     * @return
+     */
+    @PostMapping("get-user-info-by-token")
+    public BasicResponse getUserInfoByToken(HttpServletRequest request){
+        String GetToken=request.getHeader("token");
+        String UserId=tokenUtil.getIdFromToken(GetToken);
+        User user=userService.getUserById(UserId);
+        return BasicResponse.getSuccessResponse(user);
+    }
+
 }

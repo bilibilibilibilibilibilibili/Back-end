@@ -124,4 +124,9 @@ public class UserService {
     private boolean verifyUser(User user, User dbUser) {
         return Objects.equals(dbUser.getPassword(), SecureUtil.md5(user.getPassword() + dbUser.getSalt()));
     }
+
+    public User getUserById(String UserId){
+        User user = userMapper.selectUserById(UserId);
+        return user;
+    };
 }
