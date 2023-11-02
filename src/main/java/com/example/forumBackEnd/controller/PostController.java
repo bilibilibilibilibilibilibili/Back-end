@@ -1,6 +1,7 @@
 package com.example.forumBackEnd.controller;
 
 
+import com.example.forumBackEnd.inteceptor.LoginAuth;
 import com.example.forumBackEnd.pojo.Post;
 import com.example.forumBackEnd.pojo.Tag;
 import com.example.forumBackEnd.pojo.response.BasicResponse;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="post",produces = "application/json; charset=UTF-8")
+@LoginAuth
 public class PostController {
     @Resource
     private PostService postService;

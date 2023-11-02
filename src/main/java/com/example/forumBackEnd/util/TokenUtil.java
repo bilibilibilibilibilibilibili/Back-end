@@ -55,8 +55,8 @@ public class TokenUtil{
             String decodeIssuer = jwt.getIssuer();
 
             // 验证自定义参数
-            String userId = jwt.getClaim("userId").asString();
-            if (("").equals(userId) || null==userId) {
+            int userId = jwt.getClaim("userId").asInt();
+            if (userId<=0) {
                 result = false;
                 message = "invalid user info";
                 return;
