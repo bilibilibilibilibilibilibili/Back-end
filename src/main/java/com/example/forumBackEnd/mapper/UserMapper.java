@@ -27,7 +27,7 @@ public interface UserMapper {
      * @param id
      * @return
      */
-    @Select("SELECT * FROM user_table WHERE id=#{id}")
+    @Select("SELECT * FROM user_table WHERE email=#{id}")
     @ResultMap(value = "UserMap")
     User selectUserById(@Param("id") String id);
 
@@ -76,7 +76,5 @@ public interface UserMapper {
     @Select("SELECT id,activateTime FROM user_table WHERE confirmCode=#{confirmCode}")
     @ResultMap(value = "UserMap")
     User selectUserByConfirmCode(@Param("confirmCode") String confirmCode);
-
-
 
 }
