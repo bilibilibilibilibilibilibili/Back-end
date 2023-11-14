@@ -59,9 +59,14 @@ public class PostService {
         return affectRows>0;
     }
 
-    public List<Post> selectPostById(int offset) {
-        List<Post> postList = postMapper.selectPostById(offset);
-        return postList;
+    public Post selectPostById(int offset) {
+        Post postList = postMapper.selectPostById(offset);
+        if(postList != null){
+            return postList;
+        }
+        else{
+            return null ;
+        }
     }
 
     public int selectCommentFloorByPostId(int postId) {
