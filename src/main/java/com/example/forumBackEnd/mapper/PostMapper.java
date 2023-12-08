@@ -43,7 +43,7 @@ public interface PostMapper {
 
     @Select("SELECT * FROM post_table WHERE id=#{id}")
     @ResultMap(value = "PostMap")
-    List<Post> selectPostById(@Param("id") int id);
+    Post selectPostById(@Param("id") int id);
 
     @Update("UPDATE post_table SET comment=comment+1, lastComment=CURRENT_TIMESTAMP WHERE id=#{postId}")
     int updatePostOnNewComment(@Param("postId") int postId);

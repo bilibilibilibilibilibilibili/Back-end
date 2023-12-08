@@ -27,9 +27,9 @@ public interface UserMapper {
      * @param id
      * @return
      */
-    @Select("SELECT * FROM user_table WHERE email=#{id}")
+    @Select("SELECT * FROM user_table WHERE id=#{id}")
     @ResultMap(value = "UserMap")
-    User selectUserById(@Param("id") String id);
+    User selectUserById(@Param("id") int id);
 
     /**
      * 根据id修改状态值为NORMAL（可用）

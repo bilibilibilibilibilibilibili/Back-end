@@ -95,9 +95,9 @@ public class UserService {
         boolean verify = verifyUser(user, dbUser);
         //密码不一致，返回：用户名或密码错误
         if(!verify){
-            return 1;
+            return -1;
         }
-        return 2;
+        return dbUser.getId();
     }
 
     /**
@@ -121,12 +121,26 @@ public class UserService {
         }
     }
 
+    /**
+     * 根据用户uid获得信息
+     * @param userId
+     * @return
+     */
+    public User getUserById(int userId){
+        User user = userMapper.selectUserById(userId);
+        if (user!=null){
+            // 信息脱敏
+            user.setPassword("");
+            user.setConfirmCode("");
+            user.setSalt("");
+            user.setIdNumber("");
+            return user;
+        } else {
+            return null;
+        }
+    }
+
     private boolean verifyUser(User user, User dbUser) {
         return Objects.equals(dbUser.getPassword(), SecureUtil.md5(user.getPassword() + dbUser.getSalt()));
     }
-
-    public User getUserById(String UserId){
-        User user = userMapper.selectUserById(UserId);
-        return user;
-    };
 }

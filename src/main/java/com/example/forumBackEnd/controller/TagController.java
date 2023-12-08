@@ -1,5 +1,6 @@
 package com.example.forumBackEnd.controller;
 
+import com.example.forumBackEnd.inteceptor.LoginAuth;
 import com.example.forumBackEnd.pojo.response.BasicResponse;
 import com.example.forumBackEnd.service.TagService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +17,7 @@ import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
 @RestController
 @RequestMapping(path = "tag", produces = "application/json; charset=UTF-8")
+@LoginAuth
 public class TagController {
     @Resource
     private TagService tagService;

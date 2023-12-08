@@ -1,5 +1,6 @@
 package com.example.forumBackEnd.controller;
 
+import com.example.forumBackEnd.inteceptor.LoginAuth;
 import com.example.forumBackEnd.pojo.Comment;
 import com.example.forumBackEnd.pojo.response.BasicResponse;
 import com.example.forumBackEnd.service.CommentService;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="comment",produces = "application/json; charset=UTF-8")
+@LoginAuth
 public class CommentController {
     @Resource
     private CommentService commentService;

@@ -28,7 +28,7 @@ public class TokenUtil{
      * @param id
      * @return token
      */
-    public String generateToken(String id) {
+    public String generateToken(int id) {
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + expiration*1000);
         return JWT.create()
@@ -55,8 +55,8 @@ public class TokenUtil{
             String decodeIssuer = jwt.getIssuer();
 
             // 验证自定义参数
-            String userId = jwt.getClaim("userId").asString();
-            if (("").equals(userId) || null==userId) {
+            int userId = jwt.getClaim("userId").asInt();
+            if (userId<=0) {
                 result = false;
                 message = "invalid user info";
                 return;
@@ -72,8 +72,8 @@ public class TokenUtil{
         message = "token confirm";
     }
 
-    public String getIdFromToken(String token){
-        return JWT.decode(token).getClaim("userId").asString();
+    public int getIdFromToken(String token){
+        return JWT.decode(token).getClaim("userId").asInt();
     }
 
 //    /**

@@ -1,6 +1,7 @@
 package com.example.forumBackEnd.controller;
 
 
+import com.example.forumBackEnd.inteceptor.LoginAuth;
 import com.example.forumBackEnd.pojo.Post;
 import com.example.forumBackEnd.pojo.Tag;
 import com.example.forumBackEnd.pojo.response.BasicResponse;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="post",produces = "application/json; charset=UTF-8")
+@LoginAuth
 public class PostController {
     @Resource
     private PostService postService;
@@ -29,7 +31,7 @@ public class PostController {
 
     @PostMapping("test")
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public BasicResponse httpTest(@RequestBody MediaResource mediaResource){
+    public BasicResponse httpTest(@RequestBody MediaResource mediaResource) {
         System.out.println(mediaResource.getName());
         BasicResponse basicResponse = new BasicResponse();
         basicResponse.setMessage("发送成功");
@@ -37,13 +39,16 @@ public class PostController {
         basicResponse.setData(mediaResource);
 
         return basicResponse;
-    };
+    }
+
+    ;
+
     @PostMapping("test2")
     @JsonIgnoreProperties(ignoreUnknown = true)
     public BasicResponse httpTest2(@RequestBody List<Tag> tagList) {
         System.out.println(tagList);
         System.out.println(tagList.get(0) != null);
-        for(Tag tag:tagList){
+        for (Tag tag : tagList) {
             System.out.println(tag.getName());
         }
         BasicResponse basicResponse = new BasicResponse();
@@ -52,21 +57,23 @@ public class PostController {
         basicResponse.setData(tagList);
 
         return basicResponse;
-    };
+    }
+
+    ;
 
     @PostMapping("add")
     public BasicResponse addPost(@RequestBody ObjectNode request) throws JsonProcessingException {
         String json = request.get("post").toString();
-        if (!json.equals("null") && !json.equals("")){
-            Post post = OBJECT_MAPPER.readValue(json,Post.class);
+        if (!json.equals("null") && !json.equals("")) {
+            Post post = OBJECT_MAPPER.readValue(json, Post.class);
             int postId = postService.addPost(post);
-            if(postId>0){
+            if (postId > 0) {
                 ObjectNode node = OBJECT_MAPPER.createObjectNode();
-                node.put("postId",postId);
-                return BasicResponse.getSuccessResponse("添加成功",node);
+                node.put("postId", postId);
+                return BasicResponse.getSuccessResponse("添加成功", node);
             }
         }
-        return  BasicResponse.getFailResponse("添加失败");
+        return BasicResponse.getFailResponse("添加失败");
     }
 
     /*
@@ -99,10 +106,10 @@ public class PostController {
 //        for(Post post:postList){
 //            System.out.println(post);
 //        }
-        if(postList.size() == 0){
-            return BasicResponse.getSuccessResponse("获取失败，结果为空。按最近评论，第"+offset+1+"页。",null);
+        if (postList.size() == 0) {
+            return BasicResponse.getSuccessResponse("获取失败，结果为空。按最近评论，第" + offset + 1 + "页。", null);
         }
-        return BasicResponse.getSuccessResponse("按最近评论，第"+offset+1+"页",
+        return BasicResponse.getSuccessResponse("按最近评论，第" + offset + 1 + "页",
                 postList);
     }
 
@@ -114,18 +121,23 @@ public class PostController {
 //        for(Post post:postList){
 //            System.out.println(post);
 //        }
-        return BasicResponse.getSuccessResponse("按最近时间，第"+offset+"页",postList);
+        return BasicResponse.getSuccessResponse("按最近时间，第" + offset + "页", postList);
     }
 
     @PostMapping("by-id")
     @JsonIgnoreProperties(ignoreUnknown = true)
     public BasicResponse selectPostById(@RequestBody PostGetRequest request) {
+
         int id = request.getId();
-        List<Post> postList = postService.selectPostById(id);
+        if (id > 0) {
+            Post postList = postService.selectPostById(id);
+            if (postList != null) {
+                return BasicResponse.getSuccessResponse("按id", postList);
+            } else {
+                return BasicResponse.getFailResponse("获取消息失败，消息为空");
+            }
 //        for(Post post:postList){
 //            System.out.println(post);
-//        }
-        return BasicResponse.getSuccessResponse("按id",
-                postList);
+        }return BasicResponse.getFailResponse("获取消息失败");
     }
 }
