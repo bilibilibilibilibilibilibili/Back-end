@@ -73,4 +73,9 @@ public class PostService {
         return postMapper.selectCommentFloorByPostId(postId);
     }
 
+    public List<Post> selectNews(int offset) {
+        List<Post> postList = postMapper.selectNews(offset);
+        return postList;
+    }
+
 }
