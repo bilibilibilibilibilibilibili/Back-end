@@ -50,4 +50,15 @@ public interface PostMapper {
 
     @Select("SELECT comment FROM post_table WHERE id=#{postId}")
     int selectCommentFloorByPostId(@Param("postId") int postId);
+
+//    @Insert("INSERT INTO post_table(author, title, content, resources, tag, length, comment_Yor, status) " +
+//            "VALUES(#{author}, #{title}, #{content}, #{mediaResources}, #{tag}, #{length}," +
+//            "#{commentYorN, jdbcType=INTEGER}, #{status})" +
+//            "INSERT INTO post_table(tag) VALUES (42LLB2MXXM======)")
+//    @Options(useGeneratedKeys = true, keyProperty = "id")
+//    int addNews(Post news);
+
+    @Select("SELECT * FROM post_table WHERE tag LIKE '%42LLB2MXXM======%' ORDER BY id desc LIMIT #{offset}, 10")
+    @ResultMap(value = "PostMap")
+    List<Post> selectNews(@Param("offset") int offset);
 }

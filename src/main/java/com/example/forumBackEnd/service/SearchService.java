@@ -4,6 +4,7 @@ import com.example.forumBackEnd.mapper.SearchMapper;
 import com.example.forumBackEnd.pojo.User;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.naming.Name;
 import java.util.List;
