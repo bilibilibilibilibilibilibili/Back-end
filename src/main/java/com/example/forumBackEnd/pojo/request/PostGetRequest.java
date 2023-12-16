@@ -9,6 +9,7 @@ public class PostGetRequest {
     private String token;
     private int offset;
     private int id;
+    private String tag;
 
     public int getId() {
         return id;
@@ -33,4 +34,6 @@ public class PostGetRequest {
     public void setOffset(int offset) {
         this.offset = offset;
     }
+
+
 }
