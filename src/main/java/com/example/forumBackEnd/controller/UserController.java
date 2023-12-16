@@ -60,8 +60,10 @@ public class UserController {
                 }
                 default -> {
 //                    System.out.println("userId: "+result);
+                    String newToken = new TokenUtil().generateToken(result);
+//                    System.out.println("newToken:"+newToken);
                     Map<String,String> responseBody = new HashMap<>();
-                    responseBody.put("token", new TokenUtil().generateToken(result));
+                    responseBody.put("token", newToken);
                     return BasicResponse.getSuccessResponse("登录成功", responseBody);
                 }
             }
