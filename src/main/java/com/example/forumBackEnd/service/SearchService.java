@@ -17,8 +17,8 @@ public class SearchService {
     @Resource
     private SearchMapper searchMapper;
 
-    public List<String> searchByName(String Name){
-        List<String> nameList = searchMapper.searchByName(Name);
+    public List<User> searchByName(String Name){
+        List<User> nameList = searchMapper.searchByName(Name);
         return nameList;
     }
 }
