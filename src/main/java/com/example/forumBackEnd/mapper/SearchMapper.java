@@ -26,7 +26,7 @@ public interface SearchMapper {
 
     @Select("SELECT * FROM post_table WHERE title LIKE CONCAT('%',#{title},'%')")
     @Results(id="TitleMap", value={
-            @Result(property = "title", column = "title", jdbcType = JdbcType.VARCHAR, typeHandler = ListTypeHandler.class)
+            @Result(property = "title", column = "title", jdbcType = JdbcType.VARCHAR)
     })
     List<Post> searchByTitle(@Param("title") String Title);
 }
