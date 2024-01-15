@@ -34,10 +34,6 @@ public class Comment {
      */
     private String time;
     /**
-     * 引用帖子
-     */
-    private int reference;
-    /**
      * 点赞数
      */
     private int likes;
@@ -53,20 +49,33 @@ public class Comment {
      * 评论人Id
      */
     private int userId;
+    /**
+     * 评论人的id
+     */
+    private int fromId;
+    /**
+     * 评论的评论人id*/
+    private int toId;
+    /**
+     * 参考资源*/
+    private int reference;
     @JsonCreator
     public Comment(@JsonProperty("postId") int postId, @JsonProperty("floor") int floor,
                    @JsonProperty("content") String content, @JsonProperty("time") String time,
-                   @JsonProperty("reference") int reference, @JsonProperty("likes") int likes,
-                   @JsonProperty("status") CommentStatus status, @JsonProperty("ip") String ip,
-                   @JsonProperty("userId") int userId) {
+                   @JsonProperty("likes") int likes, @JsonProperty("status") CommentStatus status,
+                   @JsonProperty("ip") String ip, @JsonProperty("userId") int userId,
+                   @JsonProperty("fromId") int fromId, @JsonProperty("toId") int toId,
+                   @JsonProperty("reference") int reference) {
         this.postId = postId;
         this.floor = floor;
         this.content = content;
         this.time = time;
-        this.reference = reference;
         this.likes = likes;
         this.status = status;
         this.ip = ip;
         this.userId = userId;
+        this.fromId = fromId;
+        this.toId = toId;
+        this.reference =reference;
     }
 }

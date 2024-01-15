@@ -64,7 +64,6 @@ public interface UserMapper {
             @Result(property = "banTag", column = "banTag", typeHandler = ListTypeHandler.class),
             @Result(property = "follow", column = "follow", typeHandler = ListTypeHandler.class),
             @Result(property = "fans", column = "fans", typeHandler = ListTypeHandler.class),
-            @Result(property = "post", column = "post", typeHandler = ListTypeHandler.class),
             @Result(property = "confirmCode", column = "confirmCode", jdbcType = JdbcType.VARCHAR),
             @Result(property = "activateTime", column = "activateTime", jdbcType = JdbcType.TIME),
     })

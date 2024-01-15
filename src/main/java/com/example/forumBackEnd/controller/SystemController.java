@@ -19,4 +19,5 @@ public class SystemController {
     public String registry(){
         return "registry";
     }
+
 }

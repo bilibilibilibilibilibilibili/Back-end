@@ -68,11 +68,11 @@ public class User{
      * 电话
      */
     private String phone;
-    /**
-     * 发布过的文章id
-     * 请求中不带
-     */
-    private List<String> post;
+//    /**
+//     * 发布过的文章id
+//     * 请求中不带
+//     */
+//    private List<String> post;
     /**
      * 注册时间
      */

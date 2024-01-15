@@ -62,7 +62,6 @@ public class UserService {
             user.setBanTag(new ArrayList<>());
             user.setFans(new ArrayList<>());
             user.setFollow(new ArrayList<>());
-            user.setPost(new ArrayList<>());
             //新增账号
             int result = userMapper.insertUser(user);
 //            int result = 1;

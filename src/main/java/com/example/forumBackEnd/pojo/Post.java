@@ -76,7 +76,7 @@ public class Post {
     /**
      * 置顶评论楼层
      */
-    private String topComment;
+    private int topComment;
     /**
      * 浏览量
      */
@@ -85,6 +85,10 @@ public class Post {
      * 文章长度
      */
     private int length;
+    /**
+     * 公开
+     */
+    private boolean isConfidential;
 
     @JsonCreator
     public Post(@JsonProperty("author") int author, @JsonProperty("commentYorN") boolean commentYorN,

@@ -9,8 +9,8 @@ import org.apache.ibatis.type.JdbcType;
 import java.util.List;
 
 public interface PostMapper {
-    @Insert("INSERT INTO post_table(author, title, content, resources, tag, length, comment_Yor, status) " +
-            "VALUES(#{author}, #{title}, #{content}, #{mediaResources}, #{tag}, #{length}," +
+    @Insert("INSERT INTO post_table(author, title, content, cover, tag, length, comment_Yor, status) " +
+            "VALUES(#{author}, #{title}, #{content}, #{cover}, #{tag}, #{length}," +
             "#{commentYorN, jdbcType=INTEGER}, #{status})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int addPost(Post post);
@@ -20,7 +20,7 @@ public interface PostMapper {
             @Result(property = "id", column = "id", id=true, jdbcType = JdbcType.INTEGER),
             @Result(property = "title", column = "title", jdbcType = JdbcType.VARCHAR),
             @Result(property = "content", column = "content", jdbcType = JdbcType.LONGVARCHAR),
-            @Result(property = "mediaResources", column = "resources", jdbcType = JdbcType.LONGVARCHAR, typeHandler = ListObjectTypeHandler.class),
+            @Result(property = "cover", column = "cover", jdbcType = JdbcType.VARCHAR),
             @Result(property = "views", column = "views", jdbcType = JdbcType.INTEGER),
             @Result(property = "likes", column = "likes", jdbcType = JdbcType.INTEGER),
             @Result(property = "collections", column = "collections", jdbcType = JdbcType.INTEGER),
