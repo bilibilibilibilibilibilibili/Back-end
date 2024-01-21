@@ -118,11 +118,8 @@ public class User{
      */
     private String bandage;
 
-    public String getUserName(){
-        return userName;
-    }
-
-    public void setUserName(String userName){
+    @JsonCreator
+    public User(@JsonProperty("userName") String userName){
         this.userName = userName;
     }
 }
