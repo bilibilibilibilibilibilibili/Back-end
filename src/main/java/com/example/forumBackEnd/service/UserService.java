@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.example.forumBackEnd.mapper.UserMapper;
+import com.example.forumBackEnd.pojo.Collection;
 import com.example.forumBackEnd.pojo.User;
 import com.example.forumBackEnd.pojo.enumClass.Identity;
 import com.example.forumBackEnd.pojo.enumClass.SexEnum;
@@ -141,5 +142,21 @@ public class UserService {
 
     private boolean verifyUser(User user, User dbUser) {
         return Objects.equals(dbUser.getPassword(), SecureUtil.md5(user.getPassword() + dbUser.getSalt()));
+    }
+
+    public int addCollection(Collection collection){
+        int collection1  = userMapper.addCollection(collection);
+        if(collection1 <= 0){
+            return 0;
+        }
+        return collection.getUserId();
+    }
+
+    public int deleteCollection(Collection collection){
+        int collection2 = userMapper.deleteCollection(collection);
+        if (collection2 <= 0){
+            return 0;
+        }
+        return 1;
     }
 }

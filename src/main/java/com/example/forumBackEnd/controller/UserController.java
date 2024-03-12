@@ -1,10 +1,14 @@
 package com.example.forumBackEnd.controller;
 
 import com.example.forumBackEnd.inteceptor.LoginAuth;
+import com.example.forumBackEnd.pojo.Collection;
 import com.example.forumBackEnd.pojo.User;
 import com.example.forumBackEnd.pojo.response.BasicResponse;
 import com.example.forumBackEnd.service.UserService;
 import com.example.forumBackEnd.util.TokenUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
@@ -109,5 +113,30 @@ public class UserController {
             return BasicResponse.getFailResponse("无效token");
         }
     }
+
+    private final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    @PostMapping("Add-Collection")
+    public BasicResponse addCollection(@RequestBody Collection collection) {
+        if (collection != null){
+            int collection1 = userService.addCollection(collection);
+            if (collection1 > 0) {
+                return BasicResponse.getSuccessResponse("添加成功",null);
+            }
+        }
+        return BasicResponse.getFailResponse("添加失败");
+    }
+
+    @PostMapping("Delete-Collection")
+    public BasicResponse deleteCollection(@RequestBody Collection collection) {
+        if (collection != null){
+            int collection2 = userService.deleteCollection(collection);
+            if (collection2 == 1 ){
+                return BasicResponse.getSuccessResponse("移除成功",null);
+            }
+        }
+        return BasicResponse.getFailResponse("移除失败");
+    }
+
 
 }

@@ -4,6 +4,7 @@ import com.example.forumBackEnd.mapper.typeHandler.ListTypeHandler;
 import com.example.forumBackEnd.mapper.typeHandler.enumTypeHandler.IdentityTypeHandler;
 import com.example.forumBackEnd.mapper.typeHandler.enumTypeHandler.SexTypeHandler;
 import com.example.forumBackEnd.mapper.typeHandler.enumTypeHandler.UserStatusTypeHandler;
+import com.example.forumBackEnd.pojo.Collection;
 import com.example.forumBackEnd.pojo.User;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
@@ -75,5 +76,11 @@ public interface UserMapper {
     @Select("SELECT id,activateTime FROM user_table WHERE confirmCode=#{confirmCode}")
     @ResultMap(value = "UserMap")
     User selectUserByConfirmCode(@Param("confirmCode") String confirmCode);
+
+    @Insert("Insert INTO collection_table ( userId, postId, `time`, `category`) VALUES ( #{userId}, #{postId}, #{time}, #{category})")
+    int addCollection(Collection collection);
+
+    @Delete("DELETE FROM collection_table WHERE userId = #{userId} AND postId = #{postId}")
+    int deleteCollection(Collection collection);
 
 }
