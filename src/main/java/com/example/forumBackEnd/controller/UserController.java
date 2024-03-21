@@ -38,7 +38,7 @@ public class UserController {
             case 0 -> {
                 Map<String,String> responseBody = new HashMap<>();
 //                System.out.println(user.getId());
-                responseBody.put("token", new TokenUtil().generateToken(user.getId()));
+                responseBody.put("token", TokenUtil.generateToken(user.getId()));
                 return BasicResponse.getSuccessResponse("注册成功", responseBody);
             }
             case 1 -> {
@@ -64,7 +64,7 @@ public class UserController {
                 }
                 default -> {
 //                    System.out.println("userId: "+result);
-                    String newToken = new TokenUtil().generateToken(result);
+                    String newToken = TokenUtil.generateToken(result);
 //                    System.out.println("newToken:"+newToken);
                     Map<String,String> responseBody = new HashMap<>();
                     responseBody.put("token", newToken);
@@ -95,13 +95,13 @@ public class UserController {
 
     /**
      * 使用token获取用户信息
-     * @param request
      * @return 脱密后的User
      */
     @PostMapping("get-user-info-by-token")
     @LoginAuth
-    public BasicResponse getUserInfoByToken(HttpServletRequest request){
-        int userId = (int) request.getAttribute("userId");  // 拦截器自动取出了userId
+    public BasicResponse getUserInfoByToken(@RequestAttribute("userId")int userId){
+        // 拦截器自动取出了userId
+//        int userId = (int) request.getAttribute("userId");
         if (userId>0){
             User user = userService.getUserById(userId);
             if (user!=null){
@@ -137,6 +137,5 @@ public class UserController {
         }
         return BasicResponse.getFailResponse("移除失败");
     }
-
 
 }

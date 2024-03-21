@@ -24,8 +24,6 @@ import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
-    @Autowired
-    private TokenUtil tokenUtil;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
@@ -37,9 +35,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 
             if (clazz.isAnnotationPresent(LoginAuth.class) || method.isAnnotationPresent(LoginAuth.class)) {
                 String token = request.getHeader("token");
-                tokenUtil.verifyToken(token);
+                TokenUtil.verifyToken(token);
                 if (TokenUtil.result) {
-                    int userId = tokenUtil.getIdFromToken(token);
+                    int userId = TokenUtil.getIdFromToken(token);
                     System.out.println("userId: "+userId);
                     request.setAttribute("userId", userId);
                     TokenUtil.result = false;

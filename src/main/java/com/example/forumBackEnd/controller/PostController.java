@@ -7,15 +7,14 @@ import com.example.forumBackEnd.pojo.Tag;
 import com.example.forumBackEnd.pojo.response.BasicResponse;
 import com.example.forumBackEnd.pojo.request.PostGetRequest;
 import com.example.forumBackEnd.service.PostService;
+import com.example.forumBackEnd.util.TokenUtil;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.*;
 import com.example.forumBackEnd.pojo.MediaResource;
 
 import java.util.List;
@@ -24,6 +23,7 @@ import java.util.List;
 @RequestMapping(path="post",produces = "application/json; charset=UTF-8")
 @LoginAuth
 public class PostController {
+
     @Resource
     private PostService postService;
 
@@ -77,7 +77,7 @@ public class PostController {
     }
 
     @PostMapping("by-last-comment")
-    @JsonIgnoreProperties(ignoreUnknown = true)    // 仅供测试
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public BasicResponse selectPostByLastComment(@RequestBody PostGetRequest request) {
         int offset = request.getOffset();
         List<Post> postList = postService.selectPostByLastComment(offset);
@@ -119,5 +119,17 @@ public class PostController {
         }return BasicResponse.getFailResponse("获取消息失败");
     }
 
-
+    @PostMapping("like-by-id")
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public BasicResponse addLikeById(@RequestBody ObjectNode request){
+        int postId = request.get("id").asInt();
+        if (postId>0){
+            boolean result = postService.addLike(postId);
+            if (result){
+                return BasicResponse.getSuccessResponse("添加成功",null);
+            } else {
+                return BasicResponse.getFailResponse("添加失败，帖子不存在");
+            }
+        } return BasicResponse.getFailResponse("添加失败，帖子id有误");
+    }
 }

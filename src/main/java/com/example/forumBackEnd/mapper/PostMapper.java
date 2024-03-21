@@ -61,4 +61,7 @@ public interface PostMapper {
     @Select("SELECT * FROM post_table WHERE tag LIKE '%42LLB2MXXM======%' ORDER BY id desc LIMIT #{offset}, 10")
     @ResultMap(value = "PostMap")
     List<Post> selectNews(@Param("offset") int offset);
+
+    @Update("UPDATE post_table SET likes=likes+1 WHERE id=#{postId}")
+    int addLike(@Param("postId")int postId);
 }

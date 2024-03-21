@@ -20,9 +20,9 @@ import java.util.List;
 
 @Component
 public class TokenUtil{
-    private final String secret = "ZW1sYXRiYW56YWlp";
-    private final long expiration = 604800;  // 单位：秒
-    private final String issuer = "emlat";
+    private final static String secret = "ZW1sYXRiYW56YWlp";
+    private final static long expiration = 604800;  // 单位：秒
+    private final static String issuer = "emlat";
     public static Boolean result = false;
     public static String message = "";
 
@@ -31,7 +31,7 @@ public class TokenUtil{
      * @param id userid
      * @return token
      */
-    public String generateToken(int id) {
+    public static String generateToken(int id) {
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + expiration*1000);
         return JWT.create()
@@ -42,7 +42,7 @@ public class TokenUtil{
                 .sign(Algorithm.HMAC256(secret));
     }
 
-    public void verifyToken(String token){
+    public static void verifyToken(String token){
         try {
             if (null == token || token.equals("")) {
                 result = false;
@@ -91,7 +91,7 @@ public class TokenUtil{
         message = "token confirm";
     }
 
-    public int getIdFromToken(String token){
+    public static int getIdFromToken(String token){
         return JWT.decode(token).getClaim("userId").asInt();
     }
 

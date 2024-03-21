@@ -76,4 +76,9 @@ public class PostService {
         return postList;
     }
 
+    public boolean addLike(int postId){
+        int affectRow = postMapper.addLike(postId);
+        return affectRow>0;
+    }
+
 }
