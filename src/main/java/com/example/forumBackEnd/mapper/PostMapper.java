@@ -64,4 +64,7 @@ public interface PostMapper {
 
     @Update("UPDATE post_table SET likes=likes+1 WHERE id=#{postId}")
     int addLike(@Param("postId")int postId);
+
+    @Update("UPDATE post_table SET likes=likes-1 WHERE id=#{postId}")
+    int cancelLike(@Param("postId")int postId);
 }

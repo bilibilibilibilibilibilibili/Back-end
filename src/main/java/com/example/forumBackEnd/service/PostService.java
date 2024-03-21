@@ -81,4 +81,8 @@ public class PostService {
         return affectRow>0;
     }
 
+    public boolean cancelLike(int postId){
+        int affectRow = postMapper.cancelLike(postId);
+        return affectRow>0;
+    }
 }

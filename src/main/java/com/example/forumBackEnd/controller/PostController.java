@@ -132,4 +132,18 @@ public class PostController {
             }
         } return BasicResponse.getFailResponse("添加失败，帖子id有误");
     }
+
+    @PostMapping("like-cancel-by-id")
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public BasicResponse cancelLikeById(@RequestBody ObjectNode request){
+        int postId = request.get("id").asInt();
+        if (postId>0){
+            boolean result = postService.cancelLike(postId);
+            if (result){
+                return BasicResponse.getSuccessResponse("取消成功",null);
+            } else {
+                return BasicResponse.getFailResponse("取消失败，帖子不存在");
+            }
+        } return BasicResponse.getFailResponse("取消失败，帖子id有误");
+    }
 }

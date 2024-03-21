@@ -117,6 +117,7 @@ public class UserController {
     private final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @PostMapping("add-collection")
+    @LoginAuth
     public BasicResponse addCollection(@RequestBody Collection collection) {
         if (collection != null){
             int collection1 = userService.addCollection(collection);
@@ -128,6 +129,7 @@ public class UserController {
     }
 
     @PostMapping("delete-collection")
+    @LoginAuth
     public BasicResponse deleteCollection(@RequestBody Collection collection) {
         if (collection != null){
             int collection2 = userService.deleteCollection(collection);
