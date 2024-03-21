@@ -61,4 +61,15 @@ public class CommentController {
         }
         return BasicResponse.getSuccessResponse("获取成功，帖子id"+commentId,commentList);
     }
+
+    @PostMapping("delete-comment")
+    public BasicResponse deleteComment(@RequestBody Comment comment){
+        if (comment != null){
+            int comment2 = commentService.deleteComment(comment);
+            if (comment2 == 1){
+                return BasicResponse.getSuccessResponse("删除成功",null);
+            }
+        }
+        return BasicResponse.getFailResponse("移除失败");
+    }
 }
