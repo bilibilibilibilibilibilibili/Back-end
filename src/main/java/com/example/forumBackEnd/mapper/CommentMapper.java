@@ -28,4 +28,7 @@ public interface CommentMapper {
     @Select("SELECT * FROM comment_table WHERE comment_id=#{id} AND comment_sta='ok'")
     @ResultMap(value="CommentMap")
     List<Comment> selectCommentById(@Param("id") int id);
+
+    @Delete("DELETE FROM comment_table WHERE comment_id = #{id} AND user_id = #{userId}")
+    int deleteComment(Comment comment);
 }

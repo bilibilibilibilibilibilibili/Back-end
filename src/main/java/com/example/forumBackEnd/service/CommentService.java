@@ -46,4 +46,12 @@ public class CommentService {
 //        }
         return commentList;
     }
+
+    public int deleteComment(Comment comment){
+        int comment2 = commentMapper.deleteComment(comment);
+        if (comment2 <= 0){
+            return 0;
+        }
+        return 1;
+    }
 }

@@ -116,7 +116,7 @@ public class UserController {
 
     private final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    @PostMapping("Add-Collection")
+    @PostMapping("add-collection")
     public BasicResponse addCollection(@RequestBody Collection collection) {
         if (collection != null){
             int collection1 = userService.addCollection(collection);
@@ -127,7 +127,7 @@ public class UserController {
         return BasicResponse.getFailResponse("添加失败");
     }
 
-    @PostMapping("Delete-Collection")
+    @PostMapping("delete-collection")
     public BasicResponse deleteCollection(@RequestBody Collection collection) {
         if (collection != null){
             int collection2 = userService.deleteCollection(collection);

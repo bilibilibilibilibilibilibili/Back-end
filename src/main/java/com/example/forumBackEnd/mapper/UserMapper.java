@@ -77,7 +77,7 @@ public interface UserMapper {
     @ResultMap(value = "UserMap")
     User selectUserByConfirmCode(@Param("confirmCode") String confirmCode);
 
-    @Insert("Insert INTO collection_table ( userId, postId, `time`, `category`) VALUES ( #{userId}, #{postId}, #{time}, #{category})")
+    @Insert("Insert INTO collection_table ( userId, postId, `category`) VALUES ( #{userId}, #{postId}, #{category})")
     int addCollection(Collection collection);
 
     @Delete("DELETE FROM collection_table WHERE userId = #{userId} AND postId = #{postId}")
