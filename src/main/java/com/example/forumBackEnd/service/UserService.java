@@ -61,8 +61,8 @@ public class UserService {
             user.setIdentity(Identity.STUDENT);
             user.setSex(SexEnum.UNKNOWN);
             user.setBanTag(new ArrayList<>());
-            user.setFans(new ArrayList<>());
-            user.setFollow(new ArrayList<>());
+            user.setFans(0);
+            user.setFollow(0);
             //新增账号
             int result = userMapper.insertUser(user);
 //            int result = 1;

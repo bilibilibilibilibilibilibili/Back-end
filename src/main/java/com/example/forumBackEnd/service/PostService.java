@@ -13,8 +13,6 @@ import java.util.List;
 @Service
 public class PostService {
     @jakarta.annotation.Resource
-    private TokenUtil tokenUtil;
-    @jakarta.annotation.Resource
     private PostMapper postMapper;
 
 

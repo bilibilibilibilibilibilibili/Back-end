@@ -32,8 +32,8 @@ public interface PostMapper {
             @Result(property = "tag", column = "tag", jdbcType = JdbcType.LONGVARCHAR, typeHandler = ListTypeHandler.class), //many = @Many(select = "com.example.forumBackEnd.mapper.TagMapper.findByName")
             @Result(property = "comment", column = "comment", jdbcType = JdbcType.INTEGER),
             @Result(property = "commentYorN", column = "comment_Yor", jdbcType = JdbcType.BOOLEAN),
-            @Result(property = "topComment", column = "topComment", jdbcType = JdbcType.INTEGER)
-
+            @Result(property = "topComment", column = "topComment", jdbcType = JdbcType.INTEGER),
+            @Result(property = "isConfidential", column = "isConfidential", jdbcType = JdbcType.BOOLEAN)
     })
     List<Post> selectPostByLastComment(@Param("offset") int offset);
 

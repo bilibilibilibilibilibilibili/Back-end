@@ -21,14 +21,14 @@ import java.util.List;
 @Component
 public class TokenUtil{
     private final String secret = "ZW1sYXRiYW56YWlp";
-    private final long expiration = 60;  // 单位：秒
+    private final long expiration = 604800;  // 单位：秒
     private final String issuer = "emlat";
     public static Boolean result = false;
     public static String message = "";
 
     /**
      * 生成token
-     * @param id
+     * @param id userid
      * @return token
      */
     public String generateToken(int id) {

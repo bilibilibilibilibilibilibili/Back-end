@@ -76,28 +76,6 @@ public class PostController {
         return BasicResponse.getFailResponse("添加失败");
     }
 
-    /*
-        System.out.println(node);
-        Post post = new Post();
-        post.setAuthor(node.get("author").asInt());
-        post.setTitle(node.get("title").asText());
-        post.setContent(node.get("content").asText());
-        post.setCommentYorN(node.get("commentYorN").asBoolean());
-
-        ObjectMapper mapper = new ObjectMapper();
-        List<String> tag = mapper.convertValue(node.get("tag"), new TypeReference<List<String>>() {
-        });
-        post.setTag(tag);
-        System.out.println(post);
-        int postId = postService.addPost(post);
-        if (postId >= 0){
-            ObjectNode node2 = mapper.createObjectNode();
-            node2.put("postId", postId);
-            return BasicResponse.getSuccessResponse("添加成功",node2);
-        }
-        return BasicResponse.getFailResponse("添加失败");
-    }*/
-
     @PostMapping("by-last-comment")
     @JsonIgnoreProperties(ignoreUnknown = true)    // 仅供测试
     public BasicResponse selectPostByLastComment(@RequestBody PostGetRequest request) {
@@ -140,4 +118,6 @@ public class PostController {
 //            System.out.println(post);
         }return BasicResponse.getFailResponse("获取消息失败");
     }
+
+
 }

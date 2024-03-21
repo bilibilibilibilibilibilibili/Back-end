@@ -63,8 +63,8 @@ public interface UserMapper {
             @Result(property = "grade", column = "grade", jdbcType = JdbcType.VARCHAR),
             @Result(property = "birthday", column = "birthday", jdbcType = JdbcType.TIME),
             @Result(property = "banTag", column = "banTag", typeHandler = ListTypeHandler.class),
-            @Result(property = "follow", column = "follow", typeHandler = ListTypeHandler.class),
-            @Result(property = "fans", column = "fans", typeHandler = ListTypeHandler.class),
+            @Result(property = "follow", column = "follow", jdbcType = JdbcType.INTEGER),
+            @Result(property = "fans", column = "fans", jdbcType = JdbcType.INTEGER),
             @Result(property = "confirmCode", column = "confirmCode", jdbcType = JdbcType.VARCHAR),
             @Result(property = "activateTime", column = "activateTime", jdbcType = JdbcType.TIME),
     })

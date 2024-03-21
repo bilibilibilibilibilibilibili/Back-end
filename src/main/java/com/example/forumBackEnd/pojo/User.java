@@ -33,11 +33,11 @@ public class User{
     /**
      * 粉丝id列表
      */
-    private List<String> fans;
+    private Integer fans;
     /**
      * 关注的人
      */
-    private List<String> follow;
+    private Integer follow;
     /**
      * 年级
      */
